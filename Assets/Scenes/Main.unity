@@ -241,7 +241,7 @@ MonoBehaviour:
   _hudMessagesTable:
     m_TableReference:
       m_TableCollectionName: GUID:4c374a03043eafa438a4639ea71df295
-  _panel: {fileID: 963310815}
+  _panel: {fileID: 963310816}
   _container: {fileID: 469809978}
   _messageText: {fileID: 735012279}
 --- !u!1 &187099342
@@ -427,7 +427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &469809979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -799,10 +799,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 963310816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 171.654}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 417.61, y: -87.34875}
+  m_SizeDelta: {x: 835.22, y: 171.654}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &735012279
 MonoBehaviour:
@@ -1023,7 +1023,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 346.4698}
-  m_SizeDelta: {x: 0, y: 174.6975}
+  m_SizeDelta: {x: 835.22, y: 174.6975}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &963310817
 MonoBehaviour:
