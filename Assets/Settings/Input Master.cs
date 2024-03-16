@@ -22,9 +22,52 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Input Master"",
-    ""maps"": [],
+    ""maps"": [
+        {
+            ""name"": ""Player"",
+            ""id"": ""d33abfae-cc53-4cfe-bf13-8e652efb3a04"",
+            ""actions"": [
+                {
+                    ""name"": ""Spawn Checkpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""568fddee-a7fc-42f2-bffa-c0bc4f6972a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0e6fa338-be01-4c42-bb2b-97a639b59948"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spawn Checkpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ac4a628-858b-4eb8-9ab4-1356add89360"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spawn Checkpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        }
+    ],
     ""controlSchemes"": []
 }");
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_SpawnCheckpoint = m_Player.FindAction("Spawn Checkpoint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -81,5 +124,55 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     public int FindBinding(InputBinding bindingMask, out InputAction action)
     {
         return asset.FindBinding(bindingMask, out action);
+    }
+
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_SpawnCheckpoint;
+    public struct PlayerActions
+    {
+        private @InputMaster m_Wrapper;
+        public PlayerActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SpawnCheckpoint => m_Wrapper.m_Player_SpawnCheckpoint;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @SpawnCheckpoint.started += instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.performed += instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.canceled += instance.OnSpawnCheckpoint;
+        }
+
+        private void UnregisterCallbacks(IPlayerActions instance)
+        {
+            @SpawnCheckpoint.started -= instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.performed -= instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.canceled -= instance.OnSpawnCheckpoint;
+        }
+
+        public void RemoveCallbacks(IPlayerActions instance)
+        {
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
+    public interface IPlayerActions
+    {
+        void OnSpawnCheckpoint(InputAction.CallbackContext context);
     }
 }

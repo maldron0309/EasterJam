@@ -13,6 +13,7 @@ namespace manager
         private static void CreateSingletonServices()
         {
             new PlayerHealthService();
+            new CheckpointService();
             // ...
         }
     }

@@ -1,1 +1,45 @@
-{}
+{
+    "name": "Input Master",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "d33abfae-cc53-4cfe-bf13-8e652efb3a04",
+            "actions": [
+                {
+                    "name": "Spawn Checkpoint",
+                    "type": "Button",
+                    "id": "568fddee-a7fc-42f2-bffa-c0bc4f6972a4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0e6fa338-be01-4c42-bb2b-97a639b59948",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn Checkpoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ac4a628-858b-4eb8-9ab4-1356add89360",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn Checkpoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
