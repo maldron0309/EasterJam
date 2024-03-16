@@ -1,0 +1,1 @@
+Add animation files into this folder separated by subgroups, like "Player", "UI", etc.

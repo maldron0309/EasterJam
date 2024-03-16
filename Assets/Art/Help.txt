@@ -1,0 +1,1 @@
+Add art assets, like illustrations and background art to this folder, using groups like "Character", "Background", etc.
