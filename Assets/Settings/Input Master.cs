@@ -71,6 +71,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Spawn Checkpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d84fb96-ef96-4ace-988c-9a86a6eee299"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,28 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffa8ca60-944e-4bf1-a27f-432fc99f32ba"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spawn Checkpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be664f9b-574f-448d-8194-538c845fde06"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spawn Checkpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -240,6 +271,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_Player_Glide = m_Player.FindAction("Glide", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_SpawnCheckpoint = m_Player.FindAction("Spawn Checkpoint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -306,6 +338,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Glide;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_SpawnCheckpoint;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -315,6 +348,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @Glide => m_Wrapper.m_Player_Glide;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @SpawnCheckpoint => m_Wrapper.m_Player_SpawnCheckpoint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -339,6 +373,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @SpawnCheckpoint.started += instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.performed += instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.canceled += instance.OnSpawnCheckpoint;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -358,6 +395,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @SpawnCheckpoint.started -= instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.performed -= instance.OnSpawnCheckpoint;
+            @SpawnCheckpoint.canceled -= instance.OnSpawnCheckpoint;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -382,5 +422,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnGlide(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSpawnCheckpoint(InputAction.CallbackContext context);
     }
 }
