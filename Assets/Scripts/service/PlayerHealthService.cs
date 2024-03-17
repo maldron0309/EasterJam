@@ -56,6 +56,7 @@ namespace service
             if (_healthStatus.CurrentHealth > HealthStatus.DEATH_THRESHOLD_AMOUNT) return;
 
             OnDeath?.Invoke();
+            _healthStatus.CurrentHealth = HealthStatus.MAX_HEALTH_AMOUNT;
         }
 
         /// <summary>
