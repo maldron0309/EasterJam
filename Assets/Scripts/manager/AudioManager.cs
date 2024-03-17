@@ -1,24 +1,19 @@
 using FMODUnity;
 using UnityEngine;
 
-namespace Core
+namespace manager
 {
     public class AudioManager : MonoBehaviour
     {
-        private void Awake()
-        {
-            DontDestroyOnLoad(this);
-        }
-
         public static void UpdateBus()
         {
             var musicBus = RuntimeManager.GetBus("bus:/MUSIC");
-            musicBus.setVolume(GameSettingsManager.muteMusic ? 0f : 1f);
+            musicBus.setVolume(GameSettingsManager.MuteMusic ? 0f : 1f);
 
             var soundsBus = RuntimeManager.GetBus("bus:/SFX");
             var uiBus = RuntimeManager.GetBus("bus:/UI");
-            soundsBus.setVolume(GameSettingsManager.muteSounds ? 0f : 1f);
-            uiBus.setVolume(GameSettingsManager.muteSounds ? 0f : 1f);
+            soundsBus.setVolume(GameSettingsManager.MuteSounds ? 0f : 1f);
+            uiBus.setVolume(GameSettingsManager.MuteSounds ? 0f : 1f);
         }
     }
 }

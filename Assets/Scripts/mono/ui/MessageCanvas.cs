@@ -15,7 +15,6 @@ namespace mono.ui
         [SerializeField] private RectTransform _panel;
         [SerializeField] private GameObject _container;
         [SerializeField] private TMP_Text _messageText;
-        [SerializeField] private TextMesh _messageTextMesh;
 
         public static MessageCanvas Instance { get; private set; }
 

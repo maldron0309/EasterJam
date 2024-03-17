@@ -21,7 +21,7 @@ namespace controller
         {
             if (Instance != null) return;
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+
             InputMaster = new();
             InputMaster.Enable();
         }

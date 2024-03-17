@@ -16,7 +16,7 @@ namespace controller
             InputController.Instance.InputMaster.Player.SpawnCheckpoint.performed -= TrySpawnCheckpoint;
         }
 
-        private static void TrySpawnCheckpoint(InputAction.CallbackContext ctx)
+        private static void TrySpawnCheckpoint(InputAction.CallbackContext _)
         {
             CheckpointService.Instance.TrySpawnCheckpoint();
         }

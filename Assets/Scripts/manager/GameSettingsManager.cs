@@ -1,18 +1,18 @@
 using UnityEngine;
 
-namespace Core
+namespace manager
 {
     public static class GameSettingsManager
     {
-        public static bool muteMusic;
-        public static bool muteSounds;
+        public static bool MuteMusic { get; private set; }
+        public static bool MuteSounds { get; private set; }
 
         public static void Load()
         {
             if (HasBeenSetOnce())
             {
-                muteMusic = PlayerPrefs.GetInt("muteMusic") == 1;
-                muteSounds = PlayerPrefs.GetInt("muteSounds") == 1;
+                MuteMusic = PlayerPrefs.GetInt("muteMusic") == 1;
+                MuteSounds = PlayerPrefs.GetInt("muteSounds") == 1;
             }
             else
             {
@@ -22,20 +22,17 @@ namespace Core
 
         public static void Save()
         {
-            PlayerPrefs.SetInt("muteMusic", muteMusic ? 1 : 0);
-            PlayerPrefs.SetInt("muteSounds", muteSounds ? 1 : 0);
+            PlayerPrefs.SetInt("muteMusic", MuteMusic ? 1 : 0);
+            PlayerPrefs.SetInt("muteSounds", MuteSounds ? 1 : 0);
             AudioManager.UpdateBus();
         }
 
-        public static void LoadDefaultValues()
+        private static void LoadDefaultValues()
         {
-            muteMusic = false;
-            muteSounds = false;
+            MuteMusic = false;
+            MuteSounds = false;
         }
 
-        private static bool HasBeenSetOnce()
-        {
-            return PlayerPrefs.HasKey("muteMusic");
-        }
+        private static bool HasBeenSetOnce() => PlayerPrefs.HasKey("muteMusic");
     }
 }
