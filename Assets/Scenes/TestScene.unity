@@ -319,7 +319,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -456,19 +456,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0fe3f678cf3e74395650384cfc031f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  sprintMultiplier: 1.35
-  jumpForce: 8
-  groundLayer:
+  _moveSpeed: 400
+  _movementSmoothing: 0.0748
+  _canMove: 1
+  _sprintMultiplier: 1.5
+  _jumpForce: 575
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  groundCheckPoint: {fileID: 752863811}
-  groundCheckRadius: 0.2
-  glideGravityScale: 0.5
-  normalGravityScale: 1
-  glideFallSpeed: -1
-  interactionRadius: 1
-  interactableLayerMask:
+  _groundCheckPoint: {fileID: 752863811}
+  _groundCheckRadius: 0.2
+  _glideGravityScale: 0.5
+  _normalGravityScale: 3
+  _glideFallSpeed: -1
+  _interactionRadius: 1
+  _interactableLayerMask:
     serializedVersion: 2
     m_Bits: 128
 --- !u!1 &1788423555

@@ -1,39 +1,56 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    public float moveSpeed = 6f;
-    public float sprintMultiplier = 1.5f;
+    [Header("Movement Settings")] [SerializeField]
+    private float _moveSpeed = 6f;
 
-    [Header("Jump Settings")]
-    public float jumpForce = 7f;
-    public LayerMask groundLayer;
-    public Transform groundCheckPoint;
-    public float groundCheckRadius = 0.2f;
+    [SerializeField] private float _movementSmoothing = .05f;
+    [SerializeField] private bool _canMove = true;
 
-    [Header("Glide Settings")]
-    public float glideGravityScale = 0.5f;
-    public float normalGravityScale = 1f;
-    public float glideFallSpeed = -1f;
+    [SerializeField] private float _sprintMultiplier = 1.5f;
 
-    [Header("Interaction Settings")]
-    public float interactionRadius = 1f;
-    public LayerMask interactableLayerMask;
+    [Header("Jump Settings")] [SerializeField]
+    private float _jumpForce = 7f;
+
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private Transform _groundCheckPoint;
+    [SerializeField] private float _groundCheckRadius = 0.2f;
+
+    [Header("Glide Settings")] [SerializeField]
+    private float _glideGravityScale = 0.5f;
+
+    [SerializeField] private float _normalGravityScale = 1f;
+    [SerializeField] private float _glideFallSpeed = -1f;
+
+    [Header("Interaction Settings")] [SerializeField]
+    private float _interactionRadius = 1f;
+
+    [SerializeField] private LayerMask _interactableLayerMask;
+    private bool _attemptsGliding;
+    private bool _canGlide;
+    private bool _isGrounded;
+    private bool _isSprinting;
+    private Vector2 _moveInput;
+    private Rigidbody2D _rigidbody2D;
+    private Vector3 _velocity;
 
     private InputMaster controls;
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private bool isSprinting = false;
-    private bool isGrounded;
-    private bool isGliding = false;
 
     private void Awake()
     {
         InitializeComponents();
         SetupInputActions();
+    }
+
+    private void FixedUpdate()
+    {
+        CheckGrounded();
+        Move();
+        HandleGlide();
     }
 
     private void OnEnable()
@@ -46,87 +63,101 @@ public class PlayerController : MonoBehaviour
         controls.Player.Disable();
     }
 
-    private void FixedUpdate()
+    private void OnDrawGizmosSelected()
     {
-        CheckGrounded();
-        Move();
-        HandleGlide();
+        if (_groundCheckPoint != null) Gizmos.DrawWireSphere(_groundCheckPoint.position, _groundCheckRadius);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _interactionRadius);
     }
 
-    public void InteractWithObject()
+    private void InteractWithObject()
     {
-        Debug.Log("InteractWithObject()");
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactionRadius, interactableLayerMask);
-        foreach (var hit in hits)
-        {
-            if (hit.CompareTag("Interactable"))
-            {
-                Debug.Log("Interacted with " + hit.name);
-                // TODO Implement interaction logic here
-            }
-        }
+        // ReSharper disable once Unity.PreferNonAllocApi
+        var hits = Physics2D.OverlapCircleAll(transform.position, _interactionRadius, _interactableLayerMask);
+        foreach (var hit in hits.Where(hit => CompareTag("Interactable")))
+            Debug.Log("Interacted with " + hit.name);
+
+
+        // TODO Implement interaction logic here
     }
 
     private void InitializeComponents()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void SetupInputActions()
     {
-        controls = new InputMaster();
-        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-        controls.Player.Sprint.performed += ctx => isSprinting = true;
-        controls.Player.Sprint.canceled += ctx => isSprinting = false;
+        controls = new();
+        controls.Player.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += ctx => _moveInput = Vector2.zero;
+        controls.Player.Sprint.performed += ctx => _isSprinting = true;
+        controls.Player.Sprint.canceled += ctx => _isSprinting = false;
         controls.Player.Jump.performed += ctx => AttemptJump();
-        controls.Player.Glide.performed += ctx => isGliding = true;
-        controls.Player.Glide.canceled += ctx => isGliding = false;
+        controls.Player.Glide.performed += ctx => _attemptsGliding = true;
+        controls.Player.Glide.canceled += ctx => _attemptsGliding = false;
         controls.Player.Interact.performed += ctx => InteractWithObject();
     }
 
     private void Move()
     {
-        float currentSpeed = isSprinting ? moveSpeed * sprintMultiplier : moveSpeed;
-        Vector2 movement = new Vector2(moveInput.x * currentSpeed, rb.velocity.y);
-        rb.velocity = movement;
+        if (!_canMove) return;
+
+        var rigidBodyVelocity = _rigidbody2D.velocity;
+        var currentSpeed = _isSprinting && _isGrounded ? _moveSpeed * _sprintMultiplier : _moveSpeed;
+        var movementVelocity = new Vector2(_moveInput.x * currentSpeed * Time.fixedDeltaTime, rigidBodyVelocity.y);
+        _rigidbody2D.velocity = Vector3.SmoothDamp
+        (
+            rigidBodyVelocity,
+            movementVelocity,
+            ref _velocity,
+            _movementSmoothing
+        );
     }
 
     private void AttemptJump()
     {
-        if (isGrounded)
-        {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+        if (!_isGrounded) return;
+
+        _isGrounded = false;
+        _rigidbody2D.AddForce(new(0f, _jumpForce));
+        StartCoroutine(StartAllowGlide());
+    }
+
+    private IEnumerator StartAllowGlide()
+    {
+        yield return new WaitForSeconds(0.3f);
+        _canGlide = true;
     }
 
     private void HandleGlide()
     {
-        if (isGliding && !isGrounded)
+        if (_attemptsGliding && _canGlide && !_isGrounded)
         {
-            rb.gravityScale = glideGravityScale;
-            float yVelocity = Mathf.Max(rb.velocity.y, glideFallSpeed);
-            rb.velocity = new Vector2(rb.velocity.x, yVelocity);
+            var rigidBodyVelocity = _rigidbody2D.velocity;
+
+            _rigidbody2D.gravityScale = _glideGravityScale;
+            var yVelocity = Mathf.Max(rigidBodyVelocity.y, _glideFallSpeed);
+            var movementVelocity = new Vector2(rigidBodyVelocity.x, yVelocity);
+
+            _rigidbody2D.velocity = Vector3.SmoothDamp
+            (
+                rigidBodyVelocity,
+                movementVelocity,
+                ref _velocity,
+                _movementSmoothing
+            );
         }
         else
         {
-            rb.gravityScale = normalGravityScale;
+            _rigidbody2D.gravityScale = _normalGravityScale;
         }
     }
 
     private void CheckGrounded()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheckPoint != null)
-        {
-            Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
-        }
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, interactionRadius);
+        _isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
+        if (_isGrounded) _canGlide = false;
     }
 }
