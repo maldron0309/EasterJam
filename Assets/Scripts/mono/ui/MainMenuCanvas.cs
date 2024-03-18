@@ -12,7 +12,9 @@ namespace mono.ui
         {
             _transitionImage.color = Color.black;
             LeanTween
-                .alpha(_transitionImage.rectTransform, 0f, 2f);
+                .alpha(_transitionImage.rectTransform, 0f, 4f)
+                .setEase(LeanTweenType.linear)
+                .setDelay(0.1f);
         }
     }
 }

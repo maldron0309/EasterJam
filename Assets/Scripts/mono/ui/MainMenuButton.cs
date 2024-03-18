@@ -4,87 +4,102 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MainMenuButton : Selectable
+namespace mono.ui
 {
-    [SerializeField] private Image _highlightImage;
-    [SerializeField] private TMP_Text _buttonText;
-    [SerializeField] private Image _confirmationKeyImage;
-
-    [SerializeField] private Color _defaultColour;
-    [SerializeField] private Color _selectedColour;
-
-    [SerializeField] private UnityEvent _onClick;
-
-    private bool _hasBeenClicked;
-    private bool _isHighlighted;
-    private bool _isHoveredOver;
-
-    private void Update()
+    public class MainMenuButton : Selectable
     {
-        if (_hasBeenClicked) return;
+        [SerializeField] private Image _highlightImage;
+        [SerializeField] private TMP_Text _buttonText;
+        [SerializeField] private Image _confirmationKeyImage;
 
-        if (_isHoveredOver && !_isHighlighted) HandleHighlight();
+        [SerializeField] private Color _defaultColour;
+        [SerializeField] private Color _selectedColour;
 
-        if (!_isHoveredOver && _isHighlighted) HandleUnhighlight();
-    }
+        [SerializeField] private UnityEvent _onClick;
 
-    private void HandleHighlight()
-    {
-        _isHighlighted = true;
-        _highlightImage.gameObject.SetActive(true);
-        var defaultColour = _highlightImage.color;
-        defaultColour.a = 1f;
-        _highlightImage.color = defaultColour;
-        _highlightImage.transform.localScale = new Vector2(0f, 1f);
-        _buttonText.color = _selectedColour;
-        _confirmationKeyImage.enabled = true;
+        private bool _hasBeenClicked;
+        private bool _isHighlighted;
+        private bool _isHoveredOver;
 
-        LeanTween.scaleX(_highlightImage.gameObject, 1f, 0.1f).setEase(LeanTweenType.easeInOutBounce);
-    }
+        private void Update()
+        {
+            if (_hasBeenClicked) return;
 
-    private void HandleUnhighlight()
-    {
-        _isHighlighted = false;
-        _highlightImage.transform.localScale = Vector2.one;
-        _buttonText.color = _defaultColour;
-        _confirmationKeyImage.enabled = false;
+            if (_isHoveredOver && !_isHighlighted) HandleHighlight();
 
-        LeanTween
-            .alpha(_highlightImage.rectTransform, 0f, 0.1f)
-            .setOnComplete(() => _highlightImage.gameObject.SetActive(false));
-    }
+            if (!_isHoveredOver && _isHighlighted) HandleUnhighlight();
+        }
 
-    private void HandleClick()
-    {
-        if (!_isHighlighted) return;
-        _hasBeenClicked = true;
+        public void ResetButton()
+        {
+            _highlightImage.gameObject.SetActive(false);
+            _confirmationKeyImage.enabled = false;
+            _buttonText.gameObject.SetActive(true);
 
-        _buttonText.gameObject.SetActive(false);
-        _confirmationKeyImage.gameObject.SetActive(false);
+            _isHighlighted = false;
+            _buttonText.color = _defaultColour;
 
-        LeanTween.alpha(_highlightImage.rectTransform, 0f, 0.7f);
+            _highlightImage.transform.localScale = Vector2.one;
+        }
 
-        LeanTween
-            .scaleX(_highlightImage.gameObject, 0f, 1f)
-            .setEase(LeanTweenType.easeInOutBounce)
-            .setOnComplete(() => _onClick.Invoke());
-    }
+        private void HandleHighlight()
+        {
+            _isHighlighted = true;
+            _highlightImage.gameObject.SetActive(true);
+            var defaultColour = _highlightImage.color;
+            defaultColour.a = 1f;
+            _highlightImage.color = defaultColour;
+            _highlightImage.transform.localScale = new Vector2(0f, 1f);
+            _buttonText.color = _selectedColour;
+            _confirmationKeyImage.enabled = true;
 
-    public override void OnPointerDown(PointerEventData eventData)
-    {
-        base.OnPointerDown(eventData);
-        HandleClick();
-    }
+            LeanTween.scaleX(_highlightImage.gameObject, 1f, 0.1f).setEase(LeanTweenType.easeInOutBounce);
+        }
 
-    public override void OnPointerEnter(PointerEventData eventData)
-    {
-        base.OnPointerEnter(eventData);
-        _isHoveredOver = true;
-    }
+        private void HandleUnhighlight()
+        {
+            _isHighlighted = false;
+            _highlightImage.transform.localScale = Vector2.one;
+            _buttonText.color = _defaultColour;
+            _confirmationKeyImage.enabled = false;
+            _highlightImage.gameObject.SetActive(false);
+        }
 
-    public override void OnPointerExit(PointerEventData eventData)
-    {
-        base.OnPointerEnter(eventData);
-        _isHoveredOver = false;
+        private void HandleClick()
+        {
+            if (!_isHighlighted) return;
+            _hasBeenClicked = true;
+
+            _buttonText.gameObject.SetActive(false);
+            _confirmationKeyImage.enabled = false;
+
+            _onClick.Invoke();
+
+            LeanTween.alpha(_highlightImage.rectTransform, 0f, 0.7f);
+
+            LeanTween
+                .scaleX(_highlightImage.gameObject, 0f, 1f)
+                .setEase(LeanTweenType.easeInOutBounce)
+                .setOnComplete(() => _hasBeenClicked = false);
+        }
+
+        public override void OnPointerDown(PointerEventData eventData)
+        {
+            base.OnPointerDown(eventData);
+            HandleClick();
+        }
+
+        public override void OnPointerEnter(PointerEventData eventData)
+        {
+            Debug.Log("Enter");
+            base.OnPointerEnter(eventData);
+            _isHoveredOver = true;
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            base.OnPointerEnter(eventData);
+            _isHoveredOver = false;
+        }
     }
 }
