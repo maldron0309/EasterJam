@@ -1,10 +1,10 @@
 using controller;
 using mono.input;
+using mono.ui;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace manager
 {
@@ -23,23 +23,34 @@ namespace manager
         {
             InputController.Instance.InputMaster.InputLayout.SwitchToControlled.performed += TrySwitchToControlled;
             InputController.Instance.InputMaster.InputLayout.SwitchToMouse.performed += TrySwitchToMouse;
-            InputController.Instance.InputMaster.InputLayout.Confirm.performed += HandleConfirmation;
+            InputController.Instance.InputMaster.InputLayout.Confirm.performed += TryConfirmation;
+            InputController.Instance.InputMaster.InputLayout.Abort.performed += TryAbortion;
         }
 
         private void OnDisable()
         {
             InputController.Instance.InputMaster.InputLayout.SwitchToControlled.performed -= TrySwitchToControlled;
             InputController.Instance.InputMaster.InputLayout.SwitchToMouse.performed -= TrySwitchToMouse;
-            InputController.Instance.InputMaster.InputLayout.Confirm.performed -= HandleConfirmation;
+            InputController.Instance.InputMaster.InputLayout.Confirm.performed -= TryConfirmation;
+            InputController.Instance.InputMaster.InputLayout.Abort.performed -= TryAbortion;
         }
 
-        private void HandleConfirmation(InputAction.CallbackContext _)
+        private void TryAbortion(InputAction.CallbackContext _)
         {
-            if (EventSystem.current == null) return;
+            if (UISection.Current != null)
+                UISection.Current.TryAbortion();
+        }
+
+        private void TryConfirmation(InputAction.CallbackContext _)
+        {
+            if (EventSystem.current == null || _mouseLayoutUsed) return;
             var selectedGameObject = EventSystem.current.currentSelectedGameObject;
 
-            if (selectedGameObject.TryGetComponent<Selectable>(out var selectable))
-                Debug.Log("Confirming selectable " + selectable.name);
+            if (EventSystem.current.currentSelectedGameObject == null && UISection.Current != null)
+                UISection.Current.TryConfirmation();
+            else if (EventSystem.current.currentSelectedGameObject != null &&
+                     selectedGameObject.TryGetComponent<SelectableButton>(out var selectableButton))
+                selectableButton.Execute();
         }
 
         private void TrySwitchToMouse(InputAction.CallbackContext _)

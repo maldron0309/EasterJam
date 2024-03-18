@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace mono.ui
 {
-    public class MainMenuButton : Selectable
+    public class MainMenuButton : SelectableButton
     {
         [SerializeField] private Image _highlightImage;
         [SerializeField] private TMP_Text _buttonText;
@@ -71,13 +71,14 @@ namespace mono.ui
             _highlightImage.gameObject.SetActive(false);
         }
 
-        private void HandleClick()
+        public override void Execute()
         {
             if (!_isHighlighted) return;
             _hasBeenClicked = true;
 
             _buttonText.gameObject.SetActive(false);
             _confirmationKeyImage.enabled = false;
+            _highlightImage.transform.localScale = Vector2.one;
 
             _onClick.Invoke();
 
@@ -92,7 +93,7 @@ namespace mono.ui
         public override void OnPointerDown(PointerEventData eventData)
         {
             base.OnPointerDown(eventData);
-            HandleClick();
+            Execute();
         }
 
         public override void OnPointerEnter(PointerEventData eventData)

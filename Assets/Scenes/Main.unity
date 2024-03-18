@@ -962,6 +962,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1707126316}
+        m_TargetAssemblyTypeName: mono.input.UISection, Assembly-CSharp
+        m_MethodName: Open
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &199936386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -975,6 +987,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedStartObjectOnControlledInput: {fileID: 0}
+  _enableConfirmation: 1
+  _enableAbortion: 1
+  _onConfirmation:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199936384}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Confirm
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onAbortion:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199936384}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Abort
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1707126315}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Enter
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &250110529
 GameObject:
   m_ObjectHideFlags: 0
@@ -7371,6 +7427,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedStartObjectOnControlledInput: {fileID: 1342609799}
+  _enableConfirmation: 0
+  _enableAbortion: 0
+  _onConfirmation:
+    m_PersistentCalls:
+      m_Calls: []
+  _onAbortion:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1707522176
 GameObject:
   m_ObjectHideFlags: 0
@@ -8207,7 +8271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 251.21306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8447,7 +8511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 251.21306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9054,7 +9118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 251.21306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.y

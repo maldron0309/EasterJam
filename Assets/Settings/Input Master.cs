@@ -291,6 +291,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Abort"",
+                    ""type"": ""Button"",
+                    ""id"": ""68dcec90-e3a6-4c49-bc40-2dd0c7ba9028"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -656,6 +665,39 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14c44d2c-28a5-4d92-8575-7e5bdaba46cd"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0dd8613b-8f45-4815-8abb-45cd1b469c3d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Abort"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a530fa03-6081-4482-a208-9eddea9dc30a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Abort"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -675,6 +717,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_InputLayout_SwitchToControlled = m_InputLayout.FindAction("Switch To Controlled", throwIfNotFound: true);
         m_InputLayout_SwitchToMouse = m_InputLayout.FindAction("Switch To Mouse", throwIfNotFound: true);
         m_InputLayout_Confirm = m_InputLayout.FindAction("Confirm", throwIfNotFound: true);
+        m_InputLayout_Abort = m_InputLayout.FindAction("Abort", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -825,6 +868,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_InputLayout_SwitchToControlled;
     private readonly InputAction m_InputLayout_SwitchToMouse;
     private readonly InputAction m_InputLayout_Confirm;
+    private readonly InputAction m_InputLayout_Abort;
     public struct InputLayoutActions
     {
         private @InputMaster m_Wrapper;
@@ -832,6 +876,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @SwitchToControlled => m_Wrapper.m_InputLayout_SwitchToControlled;
         public InputAction @SwitchToMouse => m_Wrapper.m_InputLayout_SwitchToMouse;
         public InputAction @Confirm => m_Wrapper.m_InputLayout_Confirm;
+        public InputAction @Abort => m_Wrapper.m_InputLayout_Abort;
         public InputActionMap Get() { return m_Wrapper.m_InputLayout; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -850,6 +895,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
+            @Abort.started += instance.OnAbort;
+            @Abort.performed += instance.OnAbort;
+            @Abort.canceled += instance.OnAbort;
         }
 
         private void UnregisterCallbacks(IInputLayoutActions instance)
@@ -863,6 +911,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
+            @Abort.started -= instance.OnAbort;
+            @Abort.performed -= instance.OnAbort;
+            @Abort.canceled -= instance.OnAbort;
         }
 
         public void RemoveCallbacks(IInputLayoutActions instance)
@@ -894,5 +945,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnSwitchToControlled(InputAction.CallbackContext context);
         void OnSwitchToMouse(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
+        void OnAbort(InputAction.CallbackContext context);
     }
 }
