@@ -32,11 +32,14 @@ public class MainMenuButton : Selectable
     {
         _isHighlighted = true;
         _highlightImage.gameObject.SetActive(true);
+        var defaultColour = _highlightImage.color;
+        defaultColour.a = 1f;
+        _highlightImage.color = defaultColour;
         _highlightImage.transform.localScale = new Vector2(0f, 1f);
         _buttonText.color = _selectedColour;
         _confirmationKeyImage.enabled = true;
 
-        LeanTween.scaleX(_highlightImage.gameObject, 1f, 0.05f).setEase(LeanTweenType.easeInOutBounce);
+        LeanTween.scaleX(_highlightImage.gameObject, 1f, 0.1f).setEase(LeanTweenType.easeInOutBounce);
     }
 
     private void HandleUnhighlight()
@@ -47,8 +50,7 @@ public class MainMenuButton : Selectable
         _confirmationKeyImage.enabled = false;
 
         LeanTween
-            .scaleX(_highlightImage.gameObject, 0f, 0.1f)
-            .setEase(LeanTweenType.easeOutBounce)
+            .alpha(_highlightImage.rectTransform, 0f, 0.1f)
             .setOnComplete(() => _highlightImage.gameObject.SetActive(false));
     }
 
