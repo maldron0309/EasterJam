@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using mono.objects;
 using UnityEngine;
 
 namespace mono.player
@@ -40,6 +41,7 @@ namespace mono.player
         private Vector2 _moveInput;
         private Rigidbody2D _rigidbody2D;
         private Vector3 _velocity;
+        public bool CanSpawnCheckpoint => _canMove && _isGrounded;
 
         private void Awake()
         {
@@ -69,12 +71,12 @@ namespace mono.player
         public void TryInteractWithObject()
         {
             // ReSharper disable once Unity.PreferNonAllocApi
-            var hits = Physics2D.OverlapCircleAll(transform.position, _interactionRadius, _interactableLayerMask);
-            foreach (var hit in hits.Where(hit => CompareTag("Interactable")))
-                Debug.Log("Interacted with " + hit.name);
+            var hits = Physics2D.OverlapCircleAll(transform.position, _interactionRadius,
+                _interactableLayerMask);
 
-
-            // TODO Implement interaction logic here
+            foreach (var hit in hits.Where(it => it.gameObject.CompareTag("Interactable")))
+                if (hit.gameObject.TryGetComponent<InteractableObject>(out var interactableObject))
+                    interactableObject.Interact();
         }
 
         private void InitializeComponents()

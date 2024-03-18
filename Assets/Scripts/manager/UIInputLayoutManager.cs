@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
 
 namespace manager
 {
@@ -65,10 +66,18 @@ namespace manager
             SwitchToControlledLayout();
         }
 
+        public static void SetGamepadColour(Color color)
+        {
+            if (Gamepad.current == null || Gamepad.all[0] is not DualShockGamepad dualShockGamepad) return;
+            dualShockGamepad.SetLightBarColor(color);
+        }
+
         private void SwitchToControlledLayout()
         {
             _mouseLayoutUsed = false;
             _hasBeenSetUp = true;
+
+            SetGamepadColour(Color.cyan);
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -83,6 +92,7 @@ namespace manager
         {
             _mouseLayoutUsed = true;
             _hasBeenSetUp = true;
+
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

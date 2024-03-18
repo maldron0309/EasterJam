@@ -1,3 +1,4 @@
+using manager;
 using mono.input;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,11 @@ namespace mono.ui
                 .alpha(_transitionImage.rectTransform, 0f, 4f)
                 .setEase(LeanTweenType.linear)
                 .setDelay(0.1f);
+        }
+
+        public void LoadGame()
+        {
+            UIInputLayoutManager.SetGamepadColour(Color.green);
         }
     }
 }
