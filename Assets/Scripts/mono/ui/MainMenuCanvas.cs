@@ -1,3 +1,4 @@
+using mono.input;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,12 @@ namespace mono.ui
     public class MainMenuCanvas : MonoBehaviour
     {
         [SerializeField] private Image _transitionImage;
+        [SerializeField] private UISection _mainMenuSection;
+
+        private void Awake()
+        {
+            _mainMenuSection.Open();
+        }
 
         // Start is called before the first frame update
         private void Start()

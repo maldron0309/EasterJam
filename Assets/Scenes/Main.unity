@@ -1022,6 +1022,7 @@ GameObject:
   - component: {fileID: 266004133}
   - component: {fileID: 266004132}
   - component: {fileID: 266004136}
+  - component: {fileID: 266004137}
   m_Layer: 5
   m_Name: Main Menu Canvas
   m_TagString: Untagged
@@ -1127,6 +1128,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionImage: {fileID: 912013783}
+  _mainMenuSection: {fileID: 1707126316}
+--- !u!114 &266004137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266004131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344662c37fe67aa4aa18cd91c12e104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onInputLayoutChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1634670543}
+        m_TargetAssemblyTypeName: mono.ui.MainMenuButton, Assembly-CSharp
+        m_MethodName: LockHoverBehaviour
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1875786777}
+        m_TargetAssemblyTypeName: mono.ui.MainMenuButton, Assembly-CSharp
+        m_MethodName: LockHoverBehaviour
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1867286721}
+        m_TargetAssemblyTypeName: mono.ui.MainMenuButton, Assembly-CSharp
+        m_MethodName: LockHoverBehaviour
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &272809946
 GameObject:
   m_ObjectHideFlags: 0
@@ -5720,6 +5773,11 @@ MonoBehaviour:
   _targetTransform: {fileID: 780535577}
   _maxHeightPoint: {fileID: 1134082510}
   _minHeightPoint: {fileID: 1111837507}
+--- !u!1 &1342609799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5343011705394279865, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
+  m_PrefabInstance: {fileID: 1093409388272224762}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1385466702
 GameObject:
   m_ObjectHideFlags: 0
@@ -6661,6 +6719,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 76787834788926241, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
   m_PrefabInstance: {fileID: 1093409388272224762}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1634670543 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
+  m_PrefabInstance: {fileID: 1093409388272224762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342609799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beefe771cbd403149a58ca19cbf2215f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1652371657
 GameObject:
   m_ObjectHideFlags: 0
@@ -7199,6 +7268,7 @@ GameObject:
   - component: {fileID: 1707126313}
   - component: {fileID: 1707126314}
   - component: {fileID: 1707126315}
+  - component: {fileID: 1707126316}
   m_Layer: 5
   m_Name: Main Menu Container
   m_TagString: Untagged
@@ -7274,6 +7344,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1707126316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707126312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d3f604f2904b5479ac9740d1f3deef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedStartObjectOnControlledInput: {fileID: 1342609799}
 --- !u!1 &1707522176
 GameObject:
   m_ObjectHideFlags: 0
@@ -8110,7 +8193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 251.21306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8326,7 +8409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 251.21306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8433,6 +8516,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 76787834788926241, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
   m_PrefabInstance: {fileID: 1875786775}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1875786777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
+  m_PrefabInstance: {fileID: 1875786775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beefe771cbd403149a58ca19cbf2215f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1939787011
 GameObject:
   m_ObjectHideFlags: 0
@@ -8922,7 +9016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 251.21306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 316005227661963837, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8951,6 +9045,10 @@ PrefabInstance:
     - target: {fileID: 5343011705394279865, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_Name
       value: Menu Button Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
+      propertyPath: m_Navigation.m_WrapAround
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: _onClick.m_PersistentCalls.m_Calls.Array.size
