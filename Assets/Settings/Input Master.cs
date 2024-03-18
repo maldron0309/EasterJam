@@ -282,6 +282,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ed0f0c3-e33a-43d6-9594-e7e8ced7b8f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -625,6 +634,28 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""action"": ""Switch To Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca436182-06fe-46ff-882e-909b3b7b9bc1"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8975a554-0e5c-45bc-ba42-f1f872ec603d"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -643,6 +674,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_InputLayout = asset.FindActionMap("Input Layout", throwIfNotFound: true);
         m_InputLayout_SwitchToControlled = m_InputLayout.FindAction("Switch To Controlled", throwIfNotFound: true);
         m_InputLayout_SwitchToMouse = m_InputLayout.FindAction("Switch To Mouse", throwIfNotFound: true);
+        m_InputLayout_Confirm = m_InputLayout.FindAction("Confirm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -792,12 +824,14 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private List<IInputLayoutActions> m_InputLayoutActionsCallbackInterfaces = new List<IInputLayoutActions>();
     private readonly InputAction m_InputLayout_SwitchToControlled;
     private readonly InputAction m_InputLayout_SwitchToMouse;
+    private readonly InputAction m_InputLayout_Confirm;
     public struct InputLayoutActions
     {
         private @InputMaster m_Wrapper;
         public InputLayoutActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @SwitchToControlled => m_Wrapper.m_InputLayout_SwitchToControlled;
         public InputAction @SwitchToMouse => m_Wrapper.m_InputLayout_SwitchToMouse;
+        public InputAction @Confirm => m_Wrapper.m_InputLayout_Confirm;
         public InputActionMap Get() { return m_Wrapper.m_InputLayout; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -813,6 +847,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @SwitchToMouse.started += instance.OnSwitchToMouse;
             @SwitchToMouse.performed += instance.OnSwitchToMouse;
             @SwitchToMouse.canceled += instance.OnSwitchToMouse;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
         }
 
         private void UnregisterCallbacks(IInputLayoutActions instance)
@@ -823,6 +860,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @SwitchToMouse.started -= instance.OnSwitchToMouse;
             @SwitchToMouse.performed -= instance.OnSwitchToMouse;
             @SwitchToMouse.canceled -= instance.OnSwitchToMouse;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
         }
 
         public void RemoveCallbacks(IInputLayoutActions instance)
@@ -853,5 +893,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     {
         void OnSwitchToControlled(InputAction.CallbackContext context);
         void OnSwitchToMouse(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }

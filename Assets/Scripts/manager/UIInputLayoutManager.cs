@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace manager
 {
@@ -22,12 +23,23 @@ namespace manager
         {
             InputController.Instance.InputMaster.InputLayout.SwitchToControlled.performed += TrySwitchToControlled;
             InputController.Instance.InputMaster.InputLayout.SwitchToMouse.performed += TrySwitchToMouse;
+            InputController.Instance.InputMaster.InputLayout.Confirm.performed += HandleConfirmation;
         }
 
         private void OnDisable()
         {
             InputController.Instance.InputMaster.InputLayout.SwitchToControlled.performed -= TrySwitchToControlled;
             InputController.Instance.InputMaster.InputLayout.SwitchToMouse.performed -= TrySwitchToMouse;
+            InputController.Instance.InputMaster.InputLayout.Confirm.performed -= HandleConfirmation;
+        }
+
+        private void HandleConfirmation(InputAction.CallbackContext _)
+        {
+            if (EventSystem.current == null) return;
+            var selectedGameObject = EventSystem.current.currentSelectedGameObject;
+
+            if (selectedGameObject.TryGetComponent<Selectable>(out var selectable))
+                Debug.Log("Confirming selectable " + selectable.name);
         }
 
         private void TrySwitchToMouse(InputAction.CallbackContext _)
