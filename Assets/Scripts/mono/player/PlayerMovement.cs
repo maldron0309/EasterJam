@@ -36,6 +36,7 @@ namespace mono.player
         private bool _attemptsSprinting;
         private bool _canGlide;
         private bool _isGrounded;
+        private bool _jumpIsCoolingDown;
         private Vector2 _moveInput;
         private Rigidbody2D _rigidbody2D;
         private Vector3 _velocity;
@@ -114,11 +115,20 @@ namespace mono.player
 
         public void TryJump()
         {
-            if (!_isGrounded || !_canMove) return;
+            if (!_isGrounded || !_canMove || _jumpIsCoolingDown) return;
 
             _isGrounded = false;
             _rigidbody2D.AddForce(new(0f, _jumpForce));
+
+            StartCoroutine(StartJumpCooldown());
             StartCoroutine(StartAllowGlide());
+        }
+
+        private IEnumerator StartJumpCooldown()
+        {
+            _jumpIsCoolingDown = true;
+            yield return new WaitForSeconds(0.05f);
+            _jumpIsCoolingDown = false;
         }
 
         private IEnumerator StartAllowGlide()
