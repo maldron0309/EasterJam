@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 400
   _movementSmoothing: 0.0748
-  _canMove: 1
+  _canMove: 0
   _sprintMultiplier: 1.5
   _jumpForce: 575
   _groundLayer:
