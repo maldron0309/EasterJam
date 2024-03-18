@@ -60,6 +60,11 @@ namespace mono.player
             Gizmos.DrawWireSphere(transform.position, _interactionRadius);
         }
 
+        public void AllowMovement(bool allow)
+        {
+            _canMove = allow;
+        }
+
         public void TryInteractWithObject()
         {
             // ReSharper disable once Unity.PreferNonAllocApi
