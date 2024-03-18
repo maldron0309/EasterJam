@@ -114,7 +114,7 @@ namespace mono.player
 
         public void TryJump()
         {
-            if (!_isGrounded) return;
+            if (!_isGrounded || !_canMove) return;
 
             _isGrounded = false;
             _rigidbody2D.AddForce(new(0f, _jumpForce));
