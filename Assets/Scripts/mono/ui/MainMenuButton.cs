@@ -91,7 +91,6 @@ namespace mono.ui
 
         public override void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Enter");
             base.OnPointerEnter(eventData);
             _isHoveredOver = true;
         }
