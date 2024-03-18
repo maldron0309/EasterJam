@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace manager
 {
@@ -15,6 +17,9 @@ namespace manager
     {
         [Header("FMOD Audio")] [BankRef] [SerializeField]
         private List<string> _banks;
+
+        [SerializeField] private Image _studioIconImage;
+        [SerializeField] private TMP_Text _studioIconText;
 
         [Header("Scene Management")] [SerializeField]
         private string _sceneToLoadOnFinish;
@@ -37,8 +42,38 @@ namespace manager
             // Load settings
             GameSettingsManager.Load();
 
-            // Prevent flashing images on fast machines
-            yield return new WaitForSeconds(1);
+            var studioTransform = _studioIconImage.transform;
+            studioTransform.localScale = Vector2.zero;
+            studioTransform.rotation = Quaternion.identity;
+
+            _studioIconText.transform.localScale = Vector2.zero;
+
+            LeanTween
+                .scale(_studioIconImage.gameObject, Vector2.one, 1f)
+                .setEase(LeanTweenType.easeInOutCirc);
+
+            LeanTween
+                .rotateZ(_studioIconImage.gameObject, -12f, 1f)
+                .setEase(LeanTweenType.easeInOutSine);
+
+            LeanTween
+                .scale(_studioIconText.gameObject, Vector2.one, 0.7f)
+                .setEase(LeanTweenType.easeInExpo)
+                .setDelay(0.2f);
+
+            // Play the studio card intro for three seconds
+            yield return new WaitForSeconds(3);
+
+            LeanTween
+                .scale(_studioIconImage.gameObject, Vector2.zero, .4f)
+                .setEase(LeanTweenType.easeOutBounce);
+
+            LeanTween
+                .scale(_studioIconText.gameObject, Vector2.zero, 0.4f)
+                .setEase(LeanTweenType.easeOutSine)
+                .setDelay(0.2f);
+
+            yield return new WaitForSeconds(0.6f);
 
             // Start an asynchronous operation to load the scene
             var asyncSceneLoad = SceneManager.LoadSceneAsync(_sceneToLoadOnFinish);

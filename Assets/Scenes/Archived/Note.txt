@@ -1,0 +1,2 @@
+Archived scenes should not be actively worked on any more, but it makes sense to keep them,
+instead of deleting them
