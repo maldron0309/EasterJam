@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace mono.ui
 {
-    public class MainMenuButton : Selectable
+    public class MainMenuButton : SelectableButton
     {
         [SerializeField] private Image _highlightImage;
         [SerializeField] private TMP_Text _buttonText;
@@ -18,16 +18,22 @@ namespace mono.ui
         [SerializeField] private UnityEvent _onClick;
 
         private bool _hasBeenClicked;
+        private bool _hoverUnlockBehaviour;
         private bool _isHighlighted;
         private bool _isHoveredOver;
 
         private void Update()
         {
-            if (_hasBeenClicked) return;
+            if (_hasBeenClicked || !_hoverUnlockBehaviour) return;
 
             if (_isHoveredOver && !_isHighlighted) HandleHighlight();
 
             if (!_isHoveredOver && _isHighlighted) HandleUnhighlight();
+        }
+
+        public void LockHoverBehaviour(bool unlockBehaviour)
+        {
+            _hoverUnlockBehaviour = unlockBehaviour;
         }
 
         public void ResetButton()
@@ -65,13 +71,14 @@ namespace mono.ui
             _highlightImage.gameObject.SetActive(false);
         }
 
-        private void HandleClick()
+        public override void Execute()
         {
-            if (!_isHighlighted) return;
+            if (!_isHighlighted || !IsInteractable()) return;
             _hasBeenClicked = true;
 
             _buttonText.gameObject.SetActive(false);
             _confirmationKeyImage.enabled = false;
+            _highlightImage.transform.localScale = Vector2.one;
 
             _onClick.Invoke();
 
@@ -86,12 +93,11 @@ namespace mono.ui
         public override void OnPointerDown(PointerEventData eventData)
         {
             base.OnPointerDown(eventData);
-            HandleClick();
+            Execute();
         }
 
         public override void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Enter");
             base.OnPointerEnter(eventData);
             _isHoveredOver = true;
         }
@@ -100,6 +106,18 @@ namespace mono.ui
         {
             base.OnPointerEnter(eventData);
             _isHoveredOver = false;
+        }
+
+        public override void OnSelect(BaseEventData eventData)
+        {
+            base.OnSelect(eventData);
+            HandleHighlight();
+        }
+
+        public override void OnDeselect(BaseEventData eventData)
+        {
+            base.OnDeselect(eventData);
+            HandleUnhighlight();
         }
     }
 }

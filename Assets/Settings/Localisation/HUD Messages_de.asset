@@ -26,6 +26,22 @@ MonoBehaviour:
     m_Localized: Du brauchst mehr Ahornsyrup!
     m_Metadata:
       m_Items: []
+  - m_Id: 968499494936576
+    m_Localized: Bewege dich nach rechts und links
+    m_Metadata:
+      m_Items: []
+  - m_Id: 970781322141696
+    m_Localized: Springen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971153210105856
+    m_Localized: Halten um zu gleiten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971623693574144
+    m_Localized: Interagieren
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

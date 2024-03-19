@@ -76,16 +76,15 @@ namespace service
 
         public void TrySpawnCheckpoint()
         {
-            // TODO return out if player is not grounded
             if (_checkpointStatus.CurrentCheckpointMana <= CheckpointStatus.EMPTY_MANA_THRESHOLD)
             {
-                MessageCanvas.Instance.ShowMessage(MessageCanvas.NOT_ENOUGH_CHECKPOINT_MANA_KEY_NAME);
+                MessageCanvas.Instance.ShowMessage(MessageCanvas.NOT_ENOUGH_CHECKPOINT_MANA_KEY_NAME, true);
                 return;
             }
 
             ConsumeMana(CheckpointStatus.MANA_REQUIRED_TO_SPAWN_CHECKPOINT);
             CheckpointSpawner.Instance.SpawnCheckpoint();
-            MessageCanvas.Instance.ShowMessage(MessageCanvas.CHECKPOINT_SPAWNED_KEY_NAME);
+            MessageCanvas.Instance.ShowMessage(MessageCanvas.CHECKPOINT_SPAWNED_KEY_NAME, true);
 
             OnCheckpointSpawned?.Invoke();
         }
