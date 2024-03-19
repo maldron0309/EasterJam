@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{2d24112a-3de5-4559-830f-61f3a4bfd0e4}">
 		<property name="assetPath">
-			<value>Main Character/Gliding/Gliding Bounce_10.wav</value>
+			<value>MainCharacter/Gliding/Gliding_Bounce_10.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

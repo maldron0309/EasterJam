@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{e5919d0f-697d-49fc-8466-b508cc6997f1}">
 		<property name="assetPath">
-			<value>Main Character/Checkpoint Loaded/Checkpoint Loaded Bounce_01.wav</value>
+			<value>MainCharacter/Checkpoint_Loaded/Checkpoint_Loaded_Bounce_01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
