@@ -35,6 +35,10 @@ MonoBehaviour:
     m_Key: cancel-button
     m_Metadata:
       m_Items: []
+  - m_Id: 391020044640256
+    m_Key: any-key-prompt
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

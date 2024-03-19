@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed9a1db4d4ebf3448b0a4035e4ffca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allowOnceOnly: 0
+  _allowOnceOnly: 1
   _messageString:
     m_TableReference:
       m_TableCollectionName: GUID:4c374a03043eafa438a4639ea71df295
@@ -1769,7 +1769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed9a1db4d4ebf3448b0a4035e4ffca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allowOnceOnly: 0
+  _allowOnceOnly: 1
   _messageString:
     m_TableReference:
       m_TableCollectionName: GUID:4c374a03043eafa438a4639ea71df295
@@ -3395,6 +3395,7 @@ GameObject:
   - component: {fileID: 605728518}
   - component: {fileID: 605728520}
   - component: {fileID: 605728519}
+  - component: {fileID: 605728521}
   m_Layer: 5
   m_Name: Instruction Text
   m_TagString: Untagged
@@ -3518,6 +3519,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605728517}
   m_CullTransparentMesh: 1
+--- !u!114 &605728521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605728517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:3a4d58f6728b8384ca82af0f88ccddbf
+    m_TableEntryReference:
+      m_KeyId: 391020044640256
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 605728519}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &654637820
 GameObject:
   m_ObjectHideFlags: 0
@@ -7913,6 +7954,7 @@ GameObject:
   - component: {fileID: 1707126314}
   - component: {fileID: 1707126315}
   - component: {fileID: 1707126316}
+  - component: {fileID: 1707126317}
   m_Layer: 5
   m_Name: Main Menu Container
   m_TagString: Untagged
@@ -8009,6 +8051,57 @@ MonoBehaviour:
   _onAbortion:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1707126317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707126312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919f76ec452466c4bb06a7c875ce1c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1634670543}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1875786777}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1867286721}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1707522176
 GameObject:
   m_ObjectHideFlags: 0
@@ -9032,6 +9125,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: _onClick.m_PersistentCalls.m_Calls.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -9270,6 +9367,10 @@ PrefabInstance:
     - target: {fileID: 5343011705394279865, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_Name
       value: Menu Button Container (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: _onClick.m_PersistentCalls.m_Calls.Array.size
@@ -9914,6 +10015,10 @@ PrefabInstance:
     - target: {fileID: 5343011705394279865, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_Name
       value: Menu Button Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6100933080291523744, guid: 37d77676c45dca24cb0c33d8cc54a13b, type: 3}
       propertyPath: m_Navigation.m_WrapAround

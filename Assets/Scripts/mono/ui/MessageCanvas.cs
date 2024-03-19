@@ -64,8 +64,13 @@ namespace mono.ui
 
         public void ShowMessage(LocalizedString message, InputActionReference reference)
         {
-            var iconName = _fontIconPrefix + "-" + reference.action.name;
-            _messageText.text = iconName + ":" + message.GetLocalizedString();
+            if (reference != null)
+            {
+                var iconName = _fontIconPrefix + "-" + reference.action.name;
+                // TODO Do the mapping
+            }
+
+            _messageText.text = message.GetLocalizedString();
             ShowMessage();
         }
 
