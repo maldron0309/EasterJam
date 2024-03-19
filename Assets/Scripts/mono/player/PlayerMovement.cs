@@ -110,6 +110,7 @@ namespace mono.player
                 ref _velocity,
                 _movementSmoothing
             );
+
         }
 
         public void TryJump()
