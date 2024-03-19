@@ -73,7 +73,7 @@ namespace mono.ui
 
         public override void Execute()
         {
-            if (!_isHighlighted) return;
+            if (!_isHighlighted || !IsInteractable()) return;
             _hasBeenClicked = true;
 
             _buttonText.gameObject.SetActive(false);

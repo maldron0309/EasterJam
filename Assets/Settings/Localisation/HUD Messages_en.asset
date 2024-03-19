@@ -26,6 +26,22 @@ MonoBehaviour:
     m_Localized: You need more acorn syrup!
     m_Metadata:
       m_Items: []
+  - m_Id: 968499494936576
+    m_Localized: Move left and right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 970781322141696
+    m_Localized: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971153210105856
+    m_Localized: Hold to glide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971623693574144
+    m_Localized: Interact
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

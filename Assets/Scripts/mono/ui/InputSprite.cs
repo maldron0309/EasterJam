@@ -16,6 +16,7 @@ namespace mono.ui
         [SerializeField] private LayoutElement _layoutElement;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
+        private bool _hasBeenSetUp;
         private bool _usesGamepadInput;
 
         private void OnEnable()
@@ -32,9 +33,10 @@ namespace mono.ui
 
         private void SwitchToGamepad(InputAction.CallbackContext _)
         {
-            if (Gamepad.current == null || _usesGamepadInput) return;
+            if (Gamepad.current == null || (_usesGamepadInput && _hasBeenSetUp)) return;
 
             _usesGamepadInput = true;
+            _hasBeenSetUp = true;
 
             if (_spriteRenderer != null)
                 _spriteRenderer.sprite =
@@ -49,9 +51,10 @@ namespace mono.ui
 
         private void SwitchToMouse(InputAction.CallbackContext _)
         {
-            if (!_usesGamepadInput) return;
+            if (!_usesGamepadInput && _hasBeenSetUp) return;
 
             _usesGamepadInput = false;
+            _hasBeenSetUp = true;
 
             if (_spriteRenderer != null) _spriteRenderer.sprite = _emptySprite;
 

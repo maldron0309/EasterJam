@@ -1,8 +1,12 @@
 ﻿using System.Collections;
+using controller;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
 using UnityEngine.Localization;
+using UnityEngine.UI;
 
 namespace mono.ui
 {
@@ -15,6 +19,10 @@ namespace mono.ui
         [SerializeField] private RectTransform _panel;
         [SerializeField] private GameObject _container;
         [SerializeField] private TMP_Text _messageText;
+        [SerializeField] private Image _panelImage;
+        private Coroutine _fadeCoroutine;
+
+        private string _fontIconPrefix;
 
         public static MessageCanvas Instance { get; private set; }
 
@@ -24,19 +32,72 @@ namespace mono.ui
             Instance = this;
         }
 
-        public void ShowMessage(string keyName)
+        private void OnEnable()
         {
-            _container.SetActive(true);
+            InputController.Instance.InputMaster.InputLayout.AnyGamepad.performed += TrySwitchToControlled;
+            InputController.Instance.InputMaster.InputLayout.AnyMouseOrKey.performed += TrySwitchToMouse;
+        }
 
+        private void OnDisable()
+        {
+            InputController.Instance.InputMaster.InputLayout.AnyGamepad.performed -= TrySwitchToControlled;
+            InputController.Instance.InputMaster.InputLayout.AnyMouseOrKey.performed -= TrySwitchToMouse;
+        }
+
+        private void TrySwitchToMouse(InputAction.CallbackContext _)
+        {
+            // Keyboard mouse
+            _fontIconPrefix = "km";
+        }
+
+        private void TrySwitchToControlled(InputAction.CallbackContext _)
+        {
+            if (_fontIconPrefix is not "km") return;
+
+            // Gamepad other
+            _fontIconPrefix = "gpo";
+
+            // Gamepad dual shock
+            if (Gamepad.current is DualShockGamepad)
+                _fontIconPrefix = "gpd";
+        }
+
+        public void ShowMessage(LocalizedString message, InputActionReference reference)
+        {
+            if (reference != null)
+            {
+                var iconName = _fontIconPrefix + "-" + reference.action.name;
+                // TODO Do the mapping
+            }
+
+            _messageText.text = message.GetLocalizedString();
+            ShowMessage();
+        }
+
+        public void ShowMessage(string content, bool isKey = false)
+        {
+            _messageText.text = isKey ? _hudMessagesTable.GetTable().GetEntry(content).Value : content;
+            ShowMessage();
+        }
+
+        private void ShowMessage()
+        {
+            if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
+
+            _container.SetActive(true);
+            _messageText.alpha = 1f;
             _panel.localScale = new Vector2(0.5f, 0.5f);
+
+            var color = _panelImage.color;
+            color.a = 0f;
+            _panelImage.color = color;
+
             LeanTween
                 .scale(_panel, Vector3.one, 1.5f)
                 .setEase(LeanTweenType.easeOutElastic);
             LeanTween.alpha(_panel, 1f, 0.3f);
 
-            _messageText.text = _hudMessagesTable.GetTable().GetEntry(keyName).Value;
-
-            StartCoroutine(FadeOutAfterTime());
+            _fadeCoroutine = StartCoroutine(FadeOutAfterTime());
         }
 
         private IEnumerator FadeOutAfterTime()

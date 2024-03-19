@@ -38,6 +38,10 @@ MonoBehaviour:
     m_Localized: Cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 391020044640256
+    m_Localized: Press Any Key or Gamepad Button
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

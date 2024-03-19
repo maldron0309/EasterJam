@@ -23,6 +23,22 @@ MonoBehaviour:
     m_Key: not-enough-checkpoint-mana
     m_Metadata:
       m_Items: []
+  - m_Id: 968499494936576
+    m_Key: movement-tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 970781322141696
+    m_Key: jump-tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971153210105856
+    m_Key: glide-tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 971623693574144
+    m_Key: interact-tutorial
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
