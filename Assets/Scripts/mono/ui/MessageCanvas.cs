@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Localization;
+using UnityEngine.UI;
 
 namespace mono.ui
 {
@@ -15,6 +16,10 @@ namespace mono.ui
         [SerializeField] private RectTransform _panel;
         [SerializeField] private GameObject _container;
         [SerializeField] private TMP_Text _messageText;
+        [SerializeField] private Image _panelImage;
+
+
+        private Coroutine _fadeCoroutine;
 
         public static MessageCanvas Instance { get; private set; }
 
@@ -24,19 +29,36 @@ namespace mono.ui
             Instance = this;
         }
 
+        public void ShowMessage(LocalizedString message)
+        {
+            _messageText.text = message.GetLocalizedString();
+            ShowMessage();
+        }
+
         public void ShowMessage(string keyName)
         {
-            _container.SetActive(true);
+            _messageText.text = _hudMessagesTable.GetTable().GetEntry(keyName).Value;
+            ShowMessage();
+        }
 
+        private void ShowMessage()
+        {
+            if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
+
+            _container.SetActive(true);
+            _messageText.alpha = 1f;
             _panel.localScale = new Vector2(0.5f, 0.5f);
+
+            var color = _panelImage.color;
+            color.a = 0f;
+            _panelImage.color = color;
+
             LeanTween
                 .scale(_panel, Vector3.one, 1.5f)
                 .setEase(LeanTweenType.easeOutElastic);
             LeanTween.alpha(_panel, 1f, 0.3f);
 
-            _messageText.text = _hudMessagesTable.GetTable().GetEntry(keyName).Value;
-
-            StartCoroutine(FadeOutAfterTime());
+            _fadeCoroutine = StartCoroutine(FadeOutAfterTime());
         }
 
         private IEnumerator FadeOutAfterTime()
