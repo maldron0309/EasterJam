@@ -82,7 +82,7 @@ namespace manager
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            if (EventSystem.current != null)
+            if (EventSystem.current != null && UISection.Current != null)
                 EventSystem.current.SetSelectedGameObject(UISection.Current.SelectedStartObjectOnControlledInput);
 
             _onInputLayoutChanged.Invoke(false);
