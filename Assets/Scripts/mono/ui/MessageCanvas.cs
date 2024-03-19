@@ -1,7 +1,10 @@
 ﻿using System.Collections;
+using controller;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
@@ -17,9 +20,9 @@ namespace mono.ui
         [SerializeField] private GameObject _container;
         [SerializeField] private TMP_Text _messageText;
         [SerializeField] private Image _panelImage;
-
-
         private Coroutine _fadeCoroutine;
+
+        private string _fontIconPrefix;
 
         public static MessageCanvas Instance { get; private set; }
 
@@ -29,15 +32,46 @@ namespace mono.ui
             Instance = this;
         }
 
-        public void ShowMessage(LocalizedString message)
+        private void OnEnable()
         {
-            _messageText.text = message.GetLocalizedString();
+            InputController.Instance.InputMaster.InputLayout.AnyGamepad.performed += TrySwitchToControlled;
+            InputController.Instance.InputMaster.InputLayout.AnyMouseOrKey.performed += TrySwitchToMouse;
+        }
+
+        private void OnDisable()
+        {
+            InputController.Instance.InputMaster.InputLayout.AnyGamepad.performed -= TrySwitchToControlled;
+            InputController.Instance.InputMaster.InputLayout.AnyMouseOrKey.performed -= TrySwitchToMouse;
+        }
+
+        private void TrySwitchToMouse(InputAction.CallbackContext _)
+        {
+            // Keyboard mouse
+            _fontIconPrefix = "km";
+        }
+
+        private void TrySwitchToControlled(InputAction.CallbackContext _)
+        {
+            if (_fontIconPrefix is not "km") return;
+
+            // Gamepad other
+            _fontIconPrefix = "gpo";
+
+            // Gamepad dual shock
+            if (Gamepad.current is DualShockGamepad)
+                _fontIconPrefix = "gpd";
+        }
+
+        public void ShowMessage(LocalizedString message, InputActionReference reference)
+        {
+            var iconName = _fontIconPrefix + "-" + reference.action.name;
+            _messageText.text = iconName + ":" + message.GetLocalizedString();
             ShowMessage();
         }
 
-        public void ShowMessage(string keyName)
+        public void ShowMessage(string content, bool isKey = false)
         {
-            _messageText.text = _hudMessagesTable.GetTable().GetEntry(keyName).Value;
+            _messageText.text = isKey ? _hudMessagesTable.GetTable().GetEntry(content).Value : content;
             ShowMessage();
         }
 

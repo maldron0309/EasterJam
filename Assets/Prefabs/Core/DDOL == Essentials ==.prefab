@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745f3ffbbd3531843857db813a4b0b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputSprites:
+  - action: {fileID: 1157838416857555595, guid: edda9af7702930040b55b6a1d8a9d1d0, type: 3}
+    keyboardMouseSprite: {fileID: 21300000, guid: e5209b3cf5e6f5f459b1dc562f43bf90, type: 3}
+    dualshockGamepadSprite: {fileID: 0}
+    otherGamepadSprite: {fileID: 0}
 --- !u!1 &6727449312739356544
 GameObject:
   m_ObjectHideFlags: 0
