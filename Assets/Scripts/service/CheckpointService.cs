@@ -76,7 +76,6 @@ namespace service
 
         public void TrySpawnCheckpoint()
         {
-            // TODO return out if player is not grounded
             if (_checkpointStatus.CurrentCheckpointMana <= CheckpointStatus.EMPTY_MANA_THRESHOLD)
             {
                 MessageCanvas.Instance.ShowMessage(MessageCanvas.NOT_ENOUGH_CHECKPOINT_MANA_KEY_NAME);

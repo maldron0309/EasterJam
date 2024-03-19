@@ -131,7 +131,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6926493039552304761}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: d50cf3488a2dff24388d401718fbddb3, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8560b400e9784b7c9d25026f92dd085d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerMovement: {fileID: 6070844179852879417}
 --- !u!114 &7565484119364884935
 MonoBehaviour:
   m_ObjectHideFlags: 0

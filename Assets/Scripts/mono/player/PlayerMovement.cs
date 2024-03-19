@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using mono.objects;
 using UnityEngine;
 
 namespace mono.player
@@ -36,9 +37,11 @@ namespace mono.player
         private bool _attemptsSprinting;
         private bool _canGlide;
         private bool _isGrounded;
+        private bool _jumpIsCoolingDown;
         private Vector2 _moveInput;
         private Rigidbody2D _rigidbody2D;
         private Vector3 _velocity;
+        public bool CanSpawnCheckpoint => _canMove && _isGrounded;
 
         private void Awake()
         {
@@ -68,12 +71,12 @@ namespace mono.player
         public void TryInteractWithObject()
         {
             // ReSharper disable once Unity.PreferNonAllocApi
-            var hits = Physics2D.OverlapCircleAll(transform.position, _interactionRadius, _interactableLayerMask);
-            foreach (var hit in hits.Where(hit => CompareTag("Interactable")))
-                Debug.Log("Interacted with " + hit.name);
+            var hits = Physics2D.OverlapCircleAll(transform.position, _interactionRadius,
+                _interactableLayerMask);
 
-
-            // TODO Implement interaction logic here
+            foreach (var hit in hits.Where(it => it.gameObject.CompareTag("Interactable")))
+                if (hit.gameObject.TryGetComponent<InteractableObject>(out var interactableObject))
+                    interactableObject.Interact();
         }
 
         private void InitializeComponents()
@@ -114,11 +117,20 @@ namespace mono.player
 
         public void TryJump()
         {
-            if (!_isGrounded || !_canMove) return;
+            if (!_isGrounded || !_canMove || _jumpIsCoolingDown) return;
 
             _isGrounded = false;
             _rigidbody2D.AddForce(new(0f, _jumpForce));
+
+            StartCoroutine(StartJumpCooldown());
             StartCoroutine(StartAllowGlide());
+        }
+
+        private IEnumerator StartJumpCooldown()
+        {
+            _jumpIsCoolingDown = true;
+            yield return new WaitForSeconds(0.05f);
+            _jumpIsCoolingDown = false;
         }
 
         private IEnumerator StartAllowGlide()
