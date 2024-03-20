@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace mono.objects
@@ -9,6 +10,8 @@ namespace mono.objects
         [SerializeField] private int _startingMovementPoint;
 
         private int _currentPointIndex;
+
+        private bool _hasQuit;
         private bool _isMoving;
 
         private void Awake()
@@ -23,8 +26,17 @@ namespace mono.objects
             if (Vector2.Distance(transform.position, _movementPoints[_currentPointIndex].position) < 0.02f)
                 OnDestinationReached();
 
-            transform.position = Vector2.MoveTowards(transform.position, _movementPoints[_currentPointIndex].position,
-                _movementSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards
+            (
+                transform.position,
+                _movementPoints[_currentPointIndex].position,
+                _movementSpeed * Time.deltaTime
+            );
+        }
+
+        private void OnApplicationQuit()
+        {
+            _hasQuit = true;
         }
 
 
@@ -35,7 +47,16 @@ namespace mono.objects
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Player")) other.gameObject.transform.SetParent(null);
+            // Fixes errors showing up when quitting whilst the player is colliding with the platform
+            if (_hasQuit) return;
+
+            if (other.gameObject.CompareTag("Player")) StartCoroutine(ResetParentAfterFrame(other.gameObject));
+        }
+
+        private static IEnumerator ResetParentAfterFrame(GameObject other)
+        {
+            yield return null;
+            other.transform.SetParent(null);
         }
 
         private void MoveToStartingPosition()
@@ -49,9 +70,6 @@ namespace mono.objects
             if (_currentPointIndex == _movementPoints.Length) _currentPointIndex = 0;
         }
 
-        public void StartMoving()
-        {
-            _isMoving = true;
-        }
+        public void ToggleMovement() => _isMoving = !_isMoving;
     }
 }

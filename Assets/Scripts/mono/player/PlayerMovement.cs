@@ -69,6 +69,9 @@ namespace mono.player
         public void AllowMovement(bool allow)
         {
             _canMove = allow;
+
+            if (allow) return;
+            _rigidbody2D.velocity = Vector2.zero;
         }
 
         public void TryInteractWithObject()
