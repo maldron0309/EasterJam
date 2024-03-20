@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 7060873216
-    m_Localized: Endlich! Das muss der Eingang zum verlorenem Tempel sein.
+    m_Localized: Endlich! Das muss der Eingang zum [verlorenem Tempel] sein.
     m_Metadata:
       m_Items: []
   - m_Id: 59862966272
-    m_Localized: "Oh meine liebe Hazel, wenn du diesen Ort doch nur sehen k\xF6nntest,
+    m_Localized: "Oh meine liebe Hazel, wenn du [diesen Ort] doch nur sehen k\xF6nntest,
       du w\xFCrdest es hier lieben."
     m_Metadata:
       m_Items: []
@@ -32,7 +32,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 258547146752
-    m_Localized: "Aber ich werde dich zur\xFCckholen, das verspreche ich."
+    m_Localized: "Aber ich werde dich zur\xFCckholen, [das verspreche ich]."
     m_Metadata:
       m_Items: []
   references:

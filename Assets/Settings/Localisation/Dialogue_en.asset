@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 7060873216
-    m_Localized: At last! This must be the entrance to the Lost Temple.
+    m_Localized: At last! This must be the entrance to the [Lost Temple].
     m_Metadata:
       m_Items: []
   - m_Id: 59862966272
-    m_Localized: "Oh my dear Hazel, if only you could see this place, you would\u2019ve
+    m_Localized: "Oh my dear Hazel, if only you could see [this place], you would\u2019ve
       loved it here."
     m_Metadata:
       m_Items: []
@@ -32,7 +32,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 258547146752
-    m_Localized: "But I\u2019m going to get you back, I promise."
+    m_Localized: "But I\u2019m going to get you back, [I promise]."
     m_Metadata:
       m_Items: []
   references:

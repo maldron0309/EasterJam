@@ -18,12 +18,13 @@ namespace mono.ui
         [SerializeField] private GameObject _skipButtonViewContainer;
         [SerializeField] private Image _skipButtonProgressImage;
         [SerializeField] private LocalizeStringEvent _skipTextEvent;
-
-        private Coroutine _cooldownCoroutine;
         private int _currentLineIndex;
 
         private LocalizedString[] _currentLines;
         private bool _informCutscenePlayerOnFinish;
+        private bool _isRevealingCharacters;
+
+        private Coroutine _revealCoroutine;
         private bool _waitingForProceed;
 
         public static DialogueCanvas Instance { get; private set; }
@@ -37,7 +38,7 @@ namespace mono.ui
         private void FixedUpdate()
         {
             if (!_skipButtonViewContainer.activeInHierarchy) return;
-            _skipButtonProgressImage.fillAmount += 0.028f;
+            _skipButtonProgressImage.fillAmount += 0.03f;
         }
 
         private void OnEnable()
@@ -95,8 +96,9 @@ namespace mono.ui
             if (HasNextLine())
             {
                 _currentLineIndex++;
-                _dialogueText.text = _currentLines[_currentLineIndex].GetLocalizedString();
-                _cooldownCoroutine = StartCoroutine(ShowNextAfterCooldown());
+                var text = _currentLines[_currentLineIndex].GetLocalizedString();
+                _dialogueText.text = text;
+                _revealCoroutine = StartCoroutine(RevealCharacters(text));
             }
             else
             {
@@ -104,9 +106,34 @@ namespace mono.ui
             }
         }
 
+        private IEnumerator RevealCharacters(string textPart)
+        {
+            _isRevealingCharacters = true;
+
+            var totalAmountOfVisibleCharacters = textPart.Length;
+            var characterCounter = 0;
+
+            while (true)
+            {
+                var visibleCounter = characterCounter % (totalAmountOfVisibleCharacters + 1);
+                _dialogueText.maxVisibleCharacters = visibleCounter;
+
+                if (visibleCounter >= totalAmountOfVisibleCharacters)
+                {
+                    _isRevealingCharacters = false;
+                    _waitingForProceed = true;
+                    yield break;
+                }
+
+                characterCounter++;
+
+                yield return new WaitForSeconds(0.03f);
+            }
+        }
+
         private void OnDialogueFinish()
         {
-            StopCoroutine(_cooldownCoroutine);
+            StopCoroutine(_revealCoroutine);
 
             _currentLineIndex = -1;
             _currentLines = null;
@@ -116,12 +143,6 @@ namespace mono.ui
 
             _informCutscenePlayerOnFinish = false;
             _container.gameObject.SetActive(false);
-        }
-
-        private IEnumerator ShowNextAfterCooldown()
-        {
-            yield return new WaitForSeconds(3f);
-            _waitingForProceed = true;
         }
 
         private bool HasNextLine() => _currentLineIndex < _currentLines.Length - 1;
