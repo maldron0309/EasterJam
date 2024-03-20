@@ -27,7 +27,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-4413234089873188918
+--- !u!114 &-3452309737180712555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,14 +37,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MainCharacter/CheckpointSpawn
+  m_Name: event:/MainCharacter/Footsteps
   m_EditorClassIdentifier: 
-  Path: event:/MainCharacter/CheckpointSpawn
+  Path: event:/MainCharacter/Footsteps
   Guid:
-    Data1: -1191350744
-    Data2: 1162625860
-    Data3: -225025910
-    Data4: -1696895815
+    Data1: -1900038628
+    Data2: 1250420694
+    Data3: 1024390567
+    Data4: 2088020566
   Banks:
   - {fileID: -2222566705444925169}
   IsStream: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-4295738824128928954
+--- !u!114 &-2850311920759439447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,14 +64,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MainCharacter/Gliding
+  m_Name: event:/MainCharacter/LeverFlick
   m_EditorClassIdentifier: 
-  Path: event:/MainCharacter/Gliding
+  Path: event:/MainCharacter/LeverFlick
   Guid:
-    Data1: 2072054555
-    Data2: 1111872633
-    Data3: 1227056024
-    Data4: -887575236
+    Data1: 647183717
+    Data2: 1132408482
+    Data3: -184642882
+    Data4: -576767335
   Banks:
   - {fileID: -2222566705444925169}
   IsStream: 0
@@ -120,13 +120,13 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -7216118263895107880}
   - {fileID: 2528397160758562324}
-  - {fileID: -4295738824128928954}
-  - {fileID: 7830757552139340169}
-  - {fileID: -4413234089873188918}
-  - {fileID: 5559725034778935219}
-  - {fileID: 4801493067849136209}
-  - {fileID: 8120054809814741859}
-  - {fileID: 6863234049825774203}
+  - {fileID: 2512791298752333792}
+  - {fileID: -3452309737180712555}
+  - {fileID: 7011259202077596761}
+  - {fileID: 7724789311768565370}
+  - {fileID: 4398858438135117592}
+  - {fileID: -2850311920759439447}
+  - {fileID: 7210554366166029931}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2222566705444925169}
@@ -154,6 +154,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 7434560
   Exists: 1
+--- !u!114 &2512791298752333792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainCharacter/Gliding
+  m_EditorClassIdentifier: 
+  Path: event:/MainCharacter/Gliding
+  Guid:
+    Data1: 2072054555
+    Data2: 1111872633
+    Data3: 1227056024
+    Data4: -887575236
+  Banks:
+  - {fileID: -2222566705444925169}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &2528397160758562324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +233,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &4801493067849136209
+--- !u!114 &4398858438135117592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,7 +280,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1250
   Exists: 1
---- !u!114 &5559725034778935219
+--- !u!114 &7011259202077596761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,14 +290,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MainCharacter/PlayerHurt
+  m_Name: event:/MainCharacter/CheckpointSpawn
   m_EditorClassIdentifier: 
-  Path: event:/MainCharacter/PlayerHurt
+  Path: event:/MainCharacter/CheckpointSpawn
   Guid:
-    Data1: -2011124162
-    Data2: 1298921412
-    Data3: 1377856411
-    Data4: -611037747
+    Data1: -1191350744
+    Data2: 1162625860
+    Data3: -225025910
+    Data4: -1696895815
   Banks:
   - {fileID: -2222566705444925169}
   IsStream: 0
@@ -280,7 +307,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &6863234049825774203
+--- !u!114 &7210554366166029931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,7 +334,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &7830757552139340169
+--- !u!114 &7724789311768565370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -317,41 +344,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MainCharacter/Footsteps
+  m_Name: event:/MainCharacter/PlayerHurt
   m_EditorClassIdentifier: 
-  Path: event:/MainCharacter/Footsteps
+  Path: event:/MainCharacter/PlayerHurt
   Guid:
-    Data1: -1900038628
-    Data2: 1250420694
-    Data3: 1024390567
-    Data4: 2088020566
-  Banks:
-  - {fileID: -2222566705444925169}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &8120054809814741859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MainCharacter/LeverFlick
-  m_EditorClassIdentifier: 
-  Path: event:/MainCharacter/LeverFlick
-  Guid:
-    Data1: 647183717
-    Data2: 1132408482
-    Data3: -184642882
-    Data4: -576767335
+    Data1: -2011124162
+    Data2: 1298921412
+    Data3: 1377856411
+    Data4: -611037747
   Banks:
   - {fileID: -2222566705444925169}
   IsStream: 0

@@ -9,12 +9,17 @@ namespace mono.path
         [SerializeField] private Transform _destinationTransform;
         [SerializeField] private float _time;
         [SerializeField] private UnityEvent _onDestinationReached;
+        [SerializeField] private UnityEvent _onStartPath;
 
         [FormerlySerializedAs("_type")] [SerializeField]
         private LeanTweenType _easeType;
 
+        public void SetDestination(Transform destinationTransform) => _destinationTransform = destinationTransform;
+
         public void Move()
         {
+            _onStartPath.Invoke();
+
             LeanTween
                 .move(gameObject, _destinationTransform, _time)
                 .setEase(_easeType)
