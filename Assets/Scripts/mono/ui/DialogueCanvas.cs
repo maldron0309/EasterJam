@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.RegularExpressions;
 using controller;
 using manager;
 using TMPro;
@@ -6,7 +7,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 namespace mono.ui
@@ -17,9 +17,10 @@ namespace mono.ui
         [SerializeField] private TMP_Text _dialogueText;
         [SerializeField] private GameObject _skipButtonViewContainer;
         [SerializeField] private Image _skipButtonProgressImage;
-        [SerializeField] private LocalizeStringEvent _skipTextEvent;
-        private int _currentLineIndex;
+        [SerializeField] private Color _highlightedPassageColour;
+        [SerializeField] private Animator _waitForInputIndicatorAnimator;
 
+        private int _currentLineIndex;
         private LocalizedString[] _currentLines;
         private bool _informCutscenePlayerOnFinish;
         private bool _isRevealingCharacters;
@@ -97,8 +98,22 @@ namespace mono.ui
             {
                 _currentLineIndex++;
                 var text = _currentLines[_currentLineIndex].GetLocalizedString();
-                _dialogueText.text = text;
-                _revealCoroutine = StartCoroutine(RevealCharacters(text));
+                var amountOfHighlightedPassages = 0;
+
+                const string highlightedPassagePattern = @"\[(.*?)\]";
+
+                var replacedText = Regex.Replace(text, highlightedPassagePattern, match =>
+                {
+                    var matchValue = match.Groups[1].Value;
+                    amountOfHighlightedPassages++;
+                    return $"<color=#{ColorUtility.ToHtmlStringRGB(_highlightedPassageColour)}>{matchValue}</color>";
+                });
+
+                _waitForInputIndicatorAnimator.SetTrigger("Toggle");
+
+                _dialogueText.text = replacedText;
+                _revealCoroutine = StartCoroutine(RevealCharacters(
+                    text.Length - amountOfHighlightedPassages * 2));
             }
             else
             {
@@ -106,22 +121,24 @@ namespace mono.ui
             }
         }
 
-        private IEnumerator RevealCharacters(string textPart)
+        private IEnumerator RevealCharacters(int textPartLength)
         {
             _isRevealingCharacters = true;
 
-            var totalAmountOfVisibleCharacters = textPart.Length;
             var characterCounter = 0;
 
             while (true)
             {
-                var visibleCounter = characterCounter % (totalAmountOfVisibleCharacters + 1);
+                var visibleCounter = characterCounter % (textPartLength + 1);
                 _dialogueText.maxVisibleCharacters = visibleCounter;
 
-                if (visibleCounter >= totalAmountOfVisibleCharacters)
+                if (visibleCounter >= textPartLength)
                 {
                     _isRevealingCharacters = false;
                     _waitingForProceed = true;
+
+                    _waitForInputIndicatorAnimator.SetTrigger("Toggle");
+
                     yield break;
                 }
 
