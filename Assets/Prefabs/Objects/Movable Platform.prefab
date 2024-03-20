@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 4402508159224456457}
   - component: {fileID: 5790410305861677759}
   - component: {fileID: 8289064686477615727}
+  - component: {fileID: 5102768248481811498}
   m_Layer: 6
   m_Name: Movable Platform
   m_TagString: Ground
@@ -551,3 +552,34 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &5102768248481811498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6466195260039433230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1094232268
+      Data2: 1138331817
+      Data3: 223450498
+      Data4: 1805818432
+    Path: event:/MainCharacter/PlatformSound
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

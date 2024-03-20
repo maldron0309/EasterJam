@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 4956874294426670934}
   - component: {fileID: 1953432524561963063}
   - component: {fileID: 7565484119364884935}
+  - component: {fileID: 4550151877409560155}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -262,3 +263,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkpointPrefab: {fileID: 1472479043224801674, guid: e637a10b4b28fec488211e470363ad05, type: 3}
+--- !u!114 &4550151877409560155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926493039552304761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}

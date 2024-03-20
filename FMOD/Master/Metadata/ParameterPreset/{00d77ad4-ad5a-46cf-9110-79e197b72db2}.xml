@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{00d77ad4-ad5a-46cf-9110-79e197b72db2}">
+		<property name="name">
+			<value>isAirbourne</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b223953e-d5a2-4033-af06-fa0841b63b3d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{47d4fbfc-b2dc-4349-9cce-2901338ba14e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{47d4fbfc-b2dc-4349-9cce-2901338ba14e}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
