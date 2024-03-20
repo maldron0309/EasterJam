@@ -27,6 +27,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4413234089873188918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainCharacter/CheckpointSpawn
+  m_EditorClassIdentifier: 
+  Path: event:/MainCharacter/CheckpointSpawn
+  Guid:
+    Data1: -1191350744
+    Data2: 1162625860
+    Data3: -225025910
+    Data4: -1696895815
+  Banks:
+  - {fileID: -2222566705444925169}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4295738824128928954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainCharacter/Gliding
+  m_EditorClassIdentifier: 
+  Path: event:/MainCharacter/Gliding
+  Guid:
+    Data1: 2072054555
+    Data2: 1111872633
+    Data3: 1227056024
+    Data4: -887575236
+  Banks:
+  - {fileID: -2222566705444925169}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2222566705444925169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,10 +96,10 @@ MonoBehaviour:
   Path: FMOD/Master/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638464444144900000
+  lastModified: 638464754693839632
   FileSizes:
   - Name: Desktop
-    Value: 436096
+    Value: 601664
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -65,14 +119,20 @@ MonoBehaviour:
   - {fileID: 2231297730200722362}
   EditorEvents:
   - {fileID: -7216118263895107880}
-  - {fileID: 8235584417764893074}
   - {fileID: 2528397160758562324}
+  - {fileID: -4295738824128928954}
+  - {fileID: 7830757552139340169}
+  - {fileID: -4413234089873188918}
+  - {fileID: 5559725034778935219}
+  - {fileID: 4801493067849136209}
+  - {fileID: 8120054809814741859}
+  - {fileID: 6863234049825774203}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2222566705444925169}
   StringsBanks:
   - {fileID: 4964501405975405394}
-  cacheTime: 638464444267400000
+  cacheTime: 638464754694184702
   cacheVersion: 131617
 --- !u!114 &2231297730200722362
 MonoBehaviour:
@@ -89,7 +149,7 @@ MonoBehaviour:
   Path: FMOD/Master/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638464444267400000
+  lastModified: 638464754694184702
   FileSizes:
   - Name: Desktop
     Value: 7434560
@@ -146,6 +206,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &4801493067849136209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainCharacter/CheckpointLoad
+  m_EditorClassIdentifier: 
+  Path: event:/MainCharacter/CheckpointLoad
+  Guid:
+    Data1: -1045050037
+    Data2: 1079733484
+    Data3: 134898589
+    Data4: -658366310
+  Banks:
+  - {fileID: -2222566705444925169}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &4964501405975405394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,12 +248,12 @@ MonoBehaviour:
   Path: FMOD/Master/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638464444144900000
+  lastModified: 638464743953118055
   FileSizes:
   - Name: Desktop
-    Value: 986
+    Value: 1250
   Exists: 1
---- !u!114 &8235584417764893074
+--- !u!114 &5559725034778935219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,14 +263,95 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Main Character/Jump
+  m_Name: event:/MainCharacter/PlayerHurt
   m_EditorClassIdentifier: 
-  Path: event:/Main Character/Jump
+  Path: event:/MainCharacter/PlayerHurt
+  Guid:
+    Data1: -2011124162
+    Data2: 1298921412
+    Data3: 1377856411
+    Data4: -611037747
+  Banks:
+  - {fileID: -2222566705444925169}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6863234049825774203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainCharacter/Jump
+  m_EditorClassIdentifier: 
+  Path: event:/MainCharacter/Jump
   Guid:
     Data1: -616177770
     Data2: 1131684161
     Data3: 524844421
     Data4: 1352524204
+  Banks:
+  - {fileID: -2222566705444925169}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7830757552139340169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainCharacter/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/MainCharacter/Footsteps
+  Guid:
+    Data1: -1900038628
+    Data2: 1250420694
+    Data3: 1024390567
+    Data4: 2088020566
+  Banks:
+  - {fileID: -2222566705444925169}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8120054809814741859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainCharacter/LeverFlick
+  m_EditorClassIdentifier: 
+  Path: event:/MainCharacter/LeverFlick
+  Guid:
+    Data1: 647183717
+    Data2: 1132408482
+    Data3: -184642882
+    Data4: -576767335
   Banks:
   - {fileID: -2222566705444925169}
   IsStream: 0

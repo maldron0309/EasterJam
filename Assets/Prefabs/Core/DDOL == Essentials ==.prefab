@@ -44,11 +44,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745f3ffbbd3531843857db813a4b0b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputSprites:
-  - action: {fileID: 1157838416857555595, guid: edda9af7702930040b55b6a1d8a9d1d0, type: 3}
-    keyboardMouseSprite: {fileID: 21300000, guid: e5209b3cf5e6f5f459b1dc562f43bf90, type: 3}
-    dualshockGamepadSprite: {fileID: 0}
-    otherGamepadSprite: {fileID: 0}
+--- !u!1 &4525167602508426558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3336974114248553770}
+  - component: {fileID: 6496451248991244012}
+  m_Layer: 0
+  m_Name: = Cutscene Manager =
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3336974114248553770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525167602508426558}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 607343542268885398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6496451248991244012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525167602508426558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c666b3115b04eaabe08772d07f79364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6727449312739356544
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +165,7 @@ Transform:
   - {fileID: 3347126740747154072}
   - {fileID: 1492405865129364832}
   - {fileID: 6753072806538403032}
+  - {fileID: 3336974114248553770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7990616567113418509

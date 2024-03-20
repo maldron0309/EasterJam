@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using mono.objects;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace mono.player
 {
@@ -43,6 +44,8 @@ namespace mono.player
         private Vector3 _velocity;
         public bool CanSpawnCheckpoint => _canMove && _isGrounded;
 
+        public static PlayerMovement Instance { get; private set; }
+
         private void Awake()
         {
             InitializeComponents();
@@ -81,6 +84,8 @@ namespace mono.player
 
         private void InitializeComponents()
         {
+            Assert.IsNull(Instance, "Player singleton already exists!");
+            Instance = this;
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
@@ -113,7 +118,6 @@ namespace mono.player
                 ref _velocity,
                 _movementSmoothing
             );
-
         }
 
         public void TryJump()
