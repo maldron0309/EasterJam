@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace mono.objects
 {
@@ -8,6 +9,10 @@ namespace mono.objects
         [SerializeField] private float _movementSpeed;
         [SerializeField] private Transform[] _movementPoints;
         [SerializeField] private int _startingMovementPoint;
+
+        [SerializeField] private UnityEvent _onMovementStarted;
+        [SerializeField] private UnityEvent _onMovementStopped;
+
 
         private int _currentPointIndex;
 
@@ -70,6 +75,12 @@ namespace mono.objects
             if (_currentPointIndex == _movementPoints.Length) _currentPointIndex = 0;
         }
 
-        public void ToggleMovement() => _isMoving = !_isMoving;
+        public void ToggleMovement()
+        {
+            _isMoving = !_isMoving;
+
+            if (_isMoving) _onMovementStarted.Invoke();
+            else _onMovementStopped.Invoke();
+        }
     }
 }

@@ -1,11 +1,14 @@
 ﻿using mono.spawnables;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace mono.spawner
 {
     public class CheckpointSpawner : MonoBehaviour
     {
         [SerializeField] private Checkpoint _checkpointPrefab;
+        [SerializeField] private UnityEvent _onCheckpointSpawned;
+
 
         private Checkpoint _checkpoint;
 
@@ -33,6 +36,8 @@ namespace mono.spawner
 
             // Move to the player position
             _checkpoint.transform.position = transform.position;
+
+            _onCheckpointSpawned.Invoke();
         }
     }
 }

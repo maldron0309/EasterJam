@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Linq;
+using FMODUnity;
 using mono.objects;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 namespace mono.player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
+        [Header("Events")] [SerializeField] private UnityEvent _onJump;
+
+        [Header("Audio")] [SerializeField] private StudioEventEmitter _movementEventEmitter;
+
+        [SerializeField] private StudioEventEmitter _glideEventEmitter;
+
+
         [Header("Movement Settings")] [SerializeField]
         private float _moveSpeed = 6f;
 
@@ -72,6 +81,7 @@ namespace mono.player
 
             if (allow) return;
             _rigidbody2D.velocity = Vector2.zero;
+            _movementEventEmitter.SetParameter("isWalking", 0f);
         }
 
         public void TryInteractWithObject()
@@ -121,6 +131,9 @@ namespace mono.player
                 ref _velocity,
                 _movementSmoothing
             );
+
+            Debug.Log(_rigidbody2D.velocity == Vector2.zero ? 0f : 1f);
+            _movementEventEmitter.SetParameter("isWalking", _rigidbody2D.velocity == Vector2.zero ? 0f : 1f);
         }
 
         public void TryJump()
@@ -129,6 +142,7 @@ namespace mono.player
 
             _isGrounded = false;
             _rigidbody2D.AddForce(new(0f, _jumpForce));
+            _onJump.Invoke();
 
             StartCoroutine(StartJumpCooldown());
             StartCoroutine(StartAllowGlide());
@@ -164,10 +178,14 @@ namespace mono.player
                     ref _velocity,
                     _movementSmoothing
                 );
+
+                _glideEventEmitter.SetParameter("isAirbourne", 1);
             }
             else
             {
                 _rigidbody2D.gravityScale = _normalGravityScale;
+
+                _glideEventEmitter.SetParameter("isAirbourne", 0);
             }
         }
 

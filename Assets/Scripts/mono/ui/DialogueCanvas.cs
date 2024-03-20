@@ -23,7 +23,6 @@ namespace mono.ui
         private int _currentLineIndex;
         private LocalizedString[] _currentLines;
         private bool _informCutscenePlayerOnFinish;
-        private bool _isRevealingCharacters;
 
         private Coroutine _revealCoroutine;
         private bool _waitingForProceed;
@@ -123,8 +122,6 @@ namespace mono.ui
 
         private IEnumerator RevealCharacters(int textPartLength)
         {
-            _isRevealingCharacters = true;
-
             var characterCounter = 0;
 
             while (true)
@@ -134,9 +131,7 @@ namespace mono.ui
 
                 if (visibleCounter >= textPartLength)
                 {
-                    _isRevealingCharacters = false;
                     _waitingForProceed = true;
-
                     _waitForInputIndicatorAnimator.SetTrigger("Toggle");
 
                     yield break;
