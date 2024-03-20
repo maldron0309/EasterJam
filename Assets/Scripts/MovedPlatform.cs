@@ -1,30 +1,64 @@
+using System.Collections;
 using UnityEngine;
 
-public class MovPlatform : MonoBehaviour
+public class MovedPlatform : MonoBehaviour
 {
-    public Transform pointA;
-    public Transform pointB;
-    public float speed = 2.0f;
-    private bool movingTowardsB = true;
+    public float speed;
+    public int startingPoint;
+    public Transform[] points;
+    private bool isMoving = false;
+    private int i;
 
-    void Update()
+    private void Awake()
     {
-        if (movingTowardsB)
+        transform.position = points[startingPoint].position;
+    }
+
+    private void Update()
+    {
+        if (!isMoving)
         {
-            MoveTowards(pointB);
+            return;
         }
-        else
+
+        if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
         {
-            MoveTowards(pointA);
+            i++;
+            if (i == points.Length)
+            {
+                i = 0;
+            }
+        }
+
+        transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+    }
+
+    public void StartMoving()
+    {
+        isMoving = true;
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.SetParent(transform);
         }
     }
 
-    void MoveTowards(Transform target)
+    private IEnumerator ChangeParentWithDelay(Transform newParent, GameObject child)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, target.position) < 0.1f)
+        yield return null; 
+        child.transform.SetParent(newParent);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
-            movingTowardsB = !movingTowardsB;
+            StartCoroutine(ChangeParentWithDelay(null, other.gameObject));
         }
     }
+
 }

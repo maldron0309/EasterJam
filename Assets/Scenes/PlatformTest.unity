@@ -1161,7 +1161,7 @@ Transform:
   m_GameObject: {fileID: 245000213}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.51, y: 12.96, z: -0.021690914}
+  m_LocalPosition: {x: 7.51, y: 7.18, z: -0.021690914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1997,7 +1997,7 @@ Transform:
   m_GameObject: {fileID: 345962593}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.41, y: 12.96, z: -0.021690914}
+  m_LocalPosition: {x: -20.41, y: 7.18, z: -0.021690914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7658,6 +7658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6926493039552304761, guid: a03a988a147494f4980d60fbfe3e4218, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10282,6 +10286,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1938502814}
   - component: {fileID: 1938502815}
+  - component: {fileID: 1938502817}
+  - component: {fileID: 1938502816}
   m_Layer: 0
   m_Name: MovePlatform
   m_TagString: Untagged
@@ -10298,7 +10304,7 @@ Transform:
   m_GameObject: {fileID: 1938502813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47498792, y: 11.791397, z: 0.06718485}
+  m_LocalPosition: {x: 0.47498792, y: 7.18, z: 0.06718485}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10325,9 +10331,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2486ebe84b4e06948b7d5d751eed3490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {fileID: 245000214}
-  pointB: {fileID: 345962594}
   speed: 4
+  startingPoint: 0
+  points:
+  - {fileID: 245000214}
+  - {fileID: 345962594}
+--- !u!68 &1938502816
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938502813}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 6.2292385, y: -0.5481577}
+  - {x: 6.0526156, y: -0.51580524}
+  - {x: 2.1214907, y: -0.49546862}
+  - {x: 0.6412707, y: -0.4827571}
+  - {x: -0.23852158, y: -0.52694654}
+  - {x: -0.015938103, y: -0.9724331}
+  - {x: 5.875974, y: -1.0397925}
+  - {x: 6.047363, y: -0.9712472}
+  - {x: 6.2721205, y: -0.5529518}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!50 &1938502817
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938502813}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1939787011
 GameObject:
   m_ObjectHideFlags: 0
@@ -11202,11 +11285,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7810197117713923010, guid: df9dba17857538540825b1431fa2565c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.95
+      value: -3.29
       objectReference: {fileID: 0}
     - target: {fileID: 7810197117713923010, guid: df9dba17857538540825b1431fa2565c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.01
+      value: 5.19
       objectReference: {fileID: 0}
     - target: {fileID: 7810197117713923010, guid: df9dba17857538540825b1431fa2565c, type: 3}
       propertyPath: m_LocalPosition.z
