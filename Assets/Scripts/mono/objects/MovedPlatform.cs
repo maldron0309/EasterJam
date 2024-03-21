@@ -9,6 +9,7 @@ namespace mono.objects
         [SerializeField] private float _movementSpeed;
         [SerializeField] private Transform[] _movementPoints;
         [SerializeField] private int _startingMovementPoint;
+        [SerializeField] private Animator[] _railWheelAnimators;
 
         [SerializeField] private UnityEvent _onMovementStarted;
         [SerializeField] private UnityEvent _onMovementStopped;
@@ -78,6 +79,8 @@ namespace mono.objects
         public void ToggleMovement()
         {
             _isMoving = !_isMoving;
+
+            foreach (var railWheelAnimator in _railWheelAnimators) railWheelAnimator.SetBool("isMoving", _isMoving);
 
             if (_isMoving) _onMovementStarted.Invoke();
             else _onMovementStopped.Invoke();

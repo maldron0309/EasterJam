@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1687450345539071061}
   - component: {fileID: 5536588139277785598}
+  - component: {fileID: 8397777123494016699}
   m_Layer: 0
   m_Name: Right Roll
   m_TagString: Untagged
@@ -85,6 +86,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8397777123494016699
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765179950103856838}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14c586d1e9411dc45b91130319bb70ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3281141136977240350
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6622112608090658696}
   - component: {fileID: 693559474154487633}
+  - component: {fileID: 3095462008974547756}
   m_Layer: 0
   m_Name: Left Roll
   m_TagString: Untagged
@@ -170,6 +193,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3095462008974547756
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281141136977240350}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14c586d1e9411dc45b91130319bb70ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3411858453435470875
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +521,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _startingMovementPoint: 0
+  _railWheelAnimators:
+  - {fileID: 3095462008974547756}
+  - {fileID: 8397777123494016699}
   _onMovementStarted:
     m_PersistentCalls:
       m_Calls:
