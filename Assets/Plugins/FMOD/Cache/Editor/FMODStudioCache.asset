@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: MusicSync
   StudioPath: 
   Min: 0
-  Max: 2
+  Max: 3
   Default: 0
   ID:
     data1: 3344225357
@@ -26,6 +26,7 @@ MonoBehaviour:
   - Menu
   - Gameplay
   - Escape
+  - Ending
   Exists: 1
 --- !u!114 &-7728001809551013236
 MonoBehaviour:
@@ -263,7 +264,7 @@ MonoBehaviour:
   - {fileID: -2222566705444925169}
   StringsBanks:
   - {fileID: 4964501405975405394}
-  cacheTime: 638465768695400000
+  cacheTime: 638465800498600000
   cacheVersion: 131617
 --- !u!114 &769088380817053619
 MonoBehaviour:
@@ -304,10 +305,10 @@ MonoBehaviour:
   Path: FMOD/Master/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638465768695400000
+  lastModified: 638465800498600000
   FileSizes:
   - Name: Desktop
-    Value: 10999968
+    Value: 11119872
   Exists: 1
 --- !u!114 &2512791298752333792
 MonoBehaviour:
@@ -364,7 +365,7 @@ MonoBehaviour:
   - {fileID: -8592939984167568990}
   MinDistance: 1
   MaxDistance: 20
-  Length: 690500
+  Length: 744000
 --- !u!114 &4398858438135117592
 MonoBehaviour:
   m_ObjectHideFlags: 0
