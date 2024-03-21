@@ -53,7 +53,7 @@
 			<destination>{424fc577-a568-46ac-8198-6a6454b717a5}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{4fd6f99f-9a54-4db2-930c-244fdf533a8b}</destination>
+			<destination>{2b706acc-6dd9-4965-b939-ff8cb39edae4}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{03df1a24-f61a-4d37-ac73-9dab16f9a55c}" />
@@ -95,7 +95,6 @@
 		<property name="length">
 			<value>15.326258503401361</value>
 		</property>
-		<property name="name" />
 		<relationship name="modulators">
 			<destination>{7c4e3a04-540a-478e-a6cc-8cbf157c9adf}</destination>
 			<destination>{4abf262d-bc10-40a7-a142-d35002bb1b1d}</destination>
@@ -139,6 +138,7 @@
 		<relationship name="effects">
 			<destination>{5027a506-eb6c-416f-9837-a6950ea103ba}</destination>
 			<destination>{34be05a8-1461-48ea-8e45-6820ef589273}</destination>
+			<destination>{6f8b52c6-9652-4830-a90d-7fe3e2bde149}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{97b41d42-7357-45e1-9365-f9c940300fc4}" />
@@ -179,6 +179,11 @@
 		</property>
 		<property name="overrideRange">
 			<value>true</value>
+		</property>
+	</object>
+	<object class="GainEffect" id="{6f8b52c6-9652-4830-a90d-7fe3e2bde149}">
+		<property name="gain">
+			<value>9</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{85234340-4ddb-4a8c-9ed9-8e852022fb45}" />
