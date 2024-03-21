@@ -50,6 +50,20 @@ MonoBehaviour:
     m_Localized: Sprint
     m_Metadata:
       m_Items: []
+  - m_Id: 1743310533976064
+    m_Localized: 'You beat the game.
+
+      We just had time for a proof-of-concept,
+      we hope you still enjoyed!
+
+
+      Thank you for playing!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1743454818033664
+    m_Localized: Congratulations
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

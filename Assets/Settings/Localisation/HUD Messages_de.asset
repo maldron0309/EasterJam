@@ -50,6 +50,15 @@ MonoBehaviour:
     m_Localized: Sprinten
     m_Metadata:
       m_Items: []
+  - m_Id: 1743310533976064
+    m_Localized: "Du hast gewonnen.\nWir hatten nur Zeit f\xFCr ein Spielkonzept,
+      wir hoffen dennoch dir hat es gefallen!\n\nDanke f\xFCrs Spielen!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1743454818033664
+    m_Localized: "Gl\xFCckwunsch"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -15,7 +15,7 @@ namespace mono.path
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Player") && _hasBeenTriggeredOnce && _allowOnceOnly) return;
+            if (!other.CompareTag("Player") || (_hasBeenTriggeredOnce && _allowOnceOnly)) return;
             _hasBeenTriggeredOnce = true;
 
             MessageCanvas.Instance.ShowMessage(_messageString, _referencedAction);
