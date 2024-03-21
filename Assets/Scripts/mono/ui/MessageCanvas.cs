@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Text;
 using controller;
 using TMPro;
 using UnityEngine;
@@ -14,6 +16,10 @@ namespace mono.ui
     {
         public const string CHECKPOINT_SPAWNED_KEY_NAME = "checkpoint-spawned";
         public const string NOT_ENOUGH_CHECKPOINT_MANA_KEY_NAME = "not-enough-checkpoint-mana";
+
+        private const string KEYBOARD_SPRITE_PREFIX = "Keyboard Sprites";
+        private const string PLAY_STATION_SPRITE_PREFIX = "PlayStation Sprites";
+        private const string OTHER_GAMEPADS_SPRITE_PREFIX = "Other Gamepads Sprites";
 
         [SerializeField] private LocalizedStringTable _hudMessagesTable;
         [SerializeField] private RectTransform _panel;
@@ -47,30 +53,43 @@ namespace mono.ui
         private void TrySwitchToMouse(InputAction.CallbackContext _)
         {
             // Keyboard mouse
-            _fontIconPrefix = "km";
+            _fontIconPrefix = KEYBOARD_SPRITE_PREFIX;
         }
 
         private void TrySwitchToControlled(InputAction.CallbackContext _)
         {
-            if (_fontIconPrefix is not "km") return;
+            if (_fontIconPrefix is not KEYBOARD_SPRITE_PREFIX) return;
 
-            // Gamepad other
-            _fontIconPrefix = "gpo";
+            _fontIconPrefix = OTHER_GAMEPADS_SPRITE_PREFIX;
 
             // Gamepad dual shock
             if (Gamepad.current is DualShockGamepad)
-                _fontIconPrefix = "gpd";
+                _fontIconPrefix = PLAY_STATION_SPRITE_PREFIX;
         }
 
         public void ShowMessage(LocalizedString message, InputActionReference reference)
         {
+            var messageBuilder = new StringBuilder();
             if (reference != null)
             {
-                var iconName = _fontIconPrefix + "-" + reference.action.name;
-                // TODO Do the mapping
+                if (_fontIconPrefix == string.Empty)
+                    _fontIconPrefix = InputController.Instance.CurrentControlType switch
+                    {
+                        InputController.ControlType.KEYBOARD_MOUSE => KEYBOARD_SPRITE_PREFIX,
+                        InputController.ControlType.DUAL_SHOCK_GAMEPAD => PLAY_STATION_SPRITE_PREFIX,
+                        InputController.ControlType.OTHER_GAMEPAD => KEYBOARD_SPRITE_PREFIX,
+                        _ => throw new NotImplementedException("Gamepad type not implemented")
+                    };
+
+                var iconName =
+                    reference.action.actionMap.name.Replace(" ", "_").ToLower() +
+                    "-" + reference.action.name.Replace(" ", "_").ToLower();
+                var spriteTag = $"<sprite=\"{_fontIconPrefix}\" name=\"{iconName}\">";
+                messageBuilder.Append(spriteTag);
             }
 
-            _messageText.text = message.GetLocalizedString();
+            messageBuilder.Append(message.GetLocalizedString());
+            _messageText.text = messageBuilder.ToString();
             ShowMessage();
         }
 

@@ -39,6 +39,14 @@ MonoBehaviour:
     m_Key: interact-tutorial
     m_Metadata:
       m_Items: []
+  - m_Id: 1718621262602240
+    m_Key: checkpoint-tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1737855183118336
+    m_Key: sprint-tutorial
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -42,6 +42,14 @@ MonoBehaviour:
     m_Localized: Interagieren
     m_Metadata:
       m_Items: []
+  - m_Id: 1718621262602240
+    m_Localized: Speicherpunkt setzen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1737855183118336
+    m_Localized: Sprinten
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
