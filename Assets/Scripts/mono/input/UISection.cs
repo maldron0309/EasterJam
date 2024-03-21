@@ -11,6 +11,8 @@ namespace mono.input
         [SerializeField] private bool _enableConfirmation;
         [SerializeField] private bool _enableAbortion;
 
+        [SerializeField] private UnityEvent _onOpened;
+
         [ShowIf("_enableConfirmation")] [SerializeField]
         private UnityEvent _onConfirmation;
 
@@ -39,6 +41,8 @@ namespace mono.input
 
             if (EventSystem.current != null)
                 EventSystem.current.SetSelectedGameObject(_selectedStartObjectOnControlledInput);
+
+            _onOpened.Invoke();
         }
     }
 }

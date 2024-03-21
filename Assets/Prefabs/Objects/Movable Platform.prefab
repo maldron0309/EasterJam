@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1687450345539071061}
   - component: {fileID: 5536588139277785598}
+  - component: {fileID: 8397777123494016699}
   m_Layer: 0
   m_Name: Right Roll
   m_TagString: Untagged
@@ -85,6 +86,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8397777123494016699
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765179950103856838}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14c586d1e9411dc45b91130319bb70ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3281141136977240350
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6622112608090658696}
   - component: {fileID: 693559474154487633}
+  - component: {fileID: 3095462008974547756}
   m_Layer: 0
   m_Name: Left Roll
   m_TagString: Untagged
@@ -170,6 +193,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3095462008974547756
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281141136977240350}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14c586d1e9411dc45b91130319bb70ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3411858453435470875
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +480,7 @@ GameObject:
   - component: {fileID: 4402508159224456457}
   - component: {fileID: 5790410305861677759}
   - component: {fileID: 8289064686477615727}
+  - component: {fileID: 5102768248481811498}
   m_Layer: 6
   m_Name: Movable Platform
   m_TagString: Ground
@@ -476,6 +521,39 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _startingMovementPoint: 0
+  _railWheelAnimators:
+  - {fileID: 3095462008974547756}
+  - {fileID: 8397777123494016699}
+  _onMovementStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5102768248481811498}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onMovementStopped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5102768248481811498}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &5790410305861677759
 Rigidbody2D:
   serializedVersion: 4
@@ -551,3 +629,34 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &5102768248481811498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6466195260039433230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1094232268
+      Data2: 1138331817
+      Data3: 223450498
+      Data4: 1805818432
+    Path: event:/MainCharacter/PlatformSound
+  Event: 
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

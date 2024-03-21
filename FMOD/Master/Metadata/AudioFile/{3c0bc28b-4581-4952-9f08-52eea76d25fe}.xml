@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{3c0bc28b-4581-4952-9f08-52eea76d25fe}">
+		<property name="assetPath">
+			<value>MainCharacter/Platform/Plaform Bounce_02.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>15.326258503401361</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d5ce3944-1c2e-4a8e-a8ea-e42e233c6013}</destination>
+		</relationship>
+	</object>
+</objects>

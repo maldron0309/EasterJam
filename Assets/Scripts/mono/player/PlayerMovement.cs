@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Linq;
+using FMODUnity;
 using mono.objects;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 namespace mono.player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
+        [Header("Events")] [SerializeField] private UnityEvent _onJump;
+
+        [Header("Audio")] [SerializeField] private StudioEventEmitter _movementEventEmitter;
+
+        [SerializeField] private StudioEventEmitter _glideEventEmitter;
+
+
         [Header("Movement Settings")] [SerializeField]
         private float _moveSpeed = 6f;
 
@@ -37,11 +46,15 @@ namespace mono.player
         private bool _attemptsGliding;
         private bool _attemptsSprinting;
         private bool _canGlide;
+        private bool _isActivelyGliding;
         private bool _isGrounded;
         private bool _jumpIsCoolingDown;
+        private Vector2 _lastMovementVelocity;
         private Vector2 _moveInput;
         private Rigidbody2D _rigidbody2D;
         private Vector3 _velocity;
+
+
         public bool CanSpawnCheckpoint => _canMove && _isGrounded;
 
         public static PlayerMovement Instance { get; private set; }
@@ -72,6 +85,7 @@ namespace mono.player
 
             if (allow) return;
             _rigidbody2D.velocity = Vector2.zero;
+            // _movementEventEmitter.SetParameter("isWalking", 0f);
         }
 
         public void TryInteractWithObject()
@@ -121,6 +135,12 @@ namespace mono.player
                 ref _velocity,
                 _movementSmoothing
             );
+
+            // if (_lastMovementVelocity != _rigidbody2D.velocity)
+            //     _movementEventEmitter.SetParameter("isWalking",
+            //         _isGrounded && _rigidbody2D.velocity != Vector2.zero ? 1f : 0f);
+
+            _lastMovementVelocity = _velocity;
         }
 
         public void TryJump()
@@ -129,6 +149,7 @@ namespace mono.player
 
             _isGrounded = false;
             _rigidbody2D.AddForce(new(0f, _jumpForce));
+            _onJump.Invoke();
 
             StartCoroutine(StartJumpCooldown());
             StartCoroutine(StartAllowGlide());
@@ -164,10 +185,20 @@ namespace mono.player
                     ref _velocity,
                     _movementSmoothing
                 );
+
+                if (!_isActivelyGliding)
+                    _glideEventEmitter.SetParameter("isGliding", 1);
+
+                _isActivelyGliding = true;
             }
             else
             {
                 _rigidbody2D.gravityScale = _normalGravityScale;
+
+                if (_isActivelyGliding)
+                    _glideEventEmitter.SetParameter("isGliding", 0);
+
+                _isActivelyGliding = false;
             }
         }
 

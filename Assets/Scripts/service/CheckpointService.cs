@@ -84,7 +84,6 @@ namespace service
 
             ConsumeMana(CheckpointStatus.MANA_REQUIRED_TO_SPAWN_CHECKPOINT);
             CheckpointSpawner.Instance.SpawnCheckpoint();
-            MessageCanvas.Instance.ShowMessage(MessageCanvas.CHECKPOINT_SPAWNED_KEY_NAME, true);
 
             OnCheckpointSpawned?.Invoke();
         }

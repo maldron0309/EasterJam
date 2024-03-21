@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e0237831-4a98-417b-b034-d8aedb3a7cd4}">
+		<property name="assetPath">
+			<value>Music/Escape_Music/Bansuri/Bansuri_12.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>6.9069160997732428</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d5ce3944-1c2e-4a8e-a8ea-e42e233c6013}</destination>
+		</relationship>
+	</object>
+</objects>
