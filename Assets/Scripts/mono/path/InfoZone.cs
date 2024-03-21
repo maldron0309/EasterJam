@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization;
 
-namespace mono.objects
+namespace mono.path
 {
     public class InfoZone : MonoBehaviour
     {

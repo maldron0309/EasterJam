@@ -46,11 +46,15 @@ namespace mono.player
         private bool _attemptsGliding;
         private bool _attemptsSprinting;
         private bool _canGlide;
+        private bool _isActivelyGliding;
         private bool _isGrounded;
         private bool _jumpIsCoolingDown;
+        private Vector2 _lastMovementVelocity;
         private Vector2 _moveInput;
         private Rigidbody2D _rigidbody2D;
         private Vector3 _velocity;
+
+
         public bool CanSpawnCheckpoint => _canMove && _isGrounded;
 
         public static PlayerMovement Instance { get; private set; }
@@ -81,7 +85,7 @@ namespace mono.player
 
             if (allow) return;
             _rigidbody2D.velocity = Vector2.zero;
-            _movementEventEmitter.SetParameter("isWalking", 0f);
+            // _movementEventEmitter.SetParameter("isWalking", 0f);
         }
 
         public void TryInteractWithObject()
@@ -132,8 +136,11 @@ namespace mono.player
                 _movementSmoothing
             );
 
-            Debug.Log(_rigidbody2D.velocity == Vector2.zero ? 0f : 1f);
-            _movementEventEmitter.SetParameter("isWalking", _rigidbody2D.velocity == Vector2.zero ? 0f : 1f);
+            // if (_lastMovementVelocity != _rigidbody2D.velocity)
+            //     _movementEventEmitter.SetParameter("isWalking",
+            //         _isGrounded && _rigidbody2D.velocity != Vector2.zero ? 1f : 0f);
+
+            _lastMovementVelocity = _velocity;
         }
 
         public void TryJump()
@@ -179,13 +186,19 @@ namespace mono.player
                     _movementSmoothing
                 );
 
-                _glideEventEmitter.SetParameter("isAirbourne", 1);
+                if (!_isActivelyGliding)
+                    _glideEventEmitter.SetParameter("isGliding", 1);
+
+                _isActivelyGliding = true;
             }
             else
             {
                 _rigidbody2D.gravityScale = _normalGravityScale;
 
-                _glideEventEmitter.SetParameter("isAirbourne", 0);
+                if (_isActivelyGliding)
+                    _glideEventEmitter.SetParameter("isGliding", 0);
+
+                _isActivelyGliding = false;
             }
         }
 
